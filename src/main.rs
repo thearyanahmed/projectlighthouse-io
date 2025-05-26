@@ -6,5 +6,3 @@ fn main() {
     println!("Tags: {:#?}", tags);
 }
 
-
-
