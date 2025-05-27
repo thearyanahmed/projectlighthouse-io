@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Button from "$lib/components/Button copy.svelte";
+    import Button from "$lib/components/Button.svelte";
     let count = 0;
 
     function handleClick() {
