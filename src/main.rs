@@ -1,14 +1,13 @@
 use storer::StaticLookup;
 
 mod storer;
+mod config;
 
-fn main() {
-    let tags = storer::Tag::find_by_id(1);
-    let categories = storer::Category::all();
+#[tokio::main]
+async fn main() -> std::io::Result<()> {
+    let cfg = config::AppConfig::load().expect("failed to load configuration");
+    println!("Loaded configuration: {:?}", cfg);
+    Ok(())
 
-    let all_tags = storer::Tag::all();
-    println!("Tags: {:#?}", tags);
-    println!("All Tags: {:#?}", all_tags);
-    println!("Categories: {:#?}", categories);
 }
 
