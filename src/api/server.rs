@@ -3,6 +3,7 @@ use std::net::TcpListener;
 use actix_web::{App, HttpServer, HttpResponse, web};
 use actix_web::dev::Server;
 use crate::config::AppConfig;
+use actix_cors::Cors;
 
 pub struct Api {
     server: Server,
@@ -33,13 +34,18 @@ impl Api {
 }
 
 fn listen_and_serve(listener: TcpListener) -> Result<Server, std::io::Error> {
-    let server = HttpServer:: new(move || {
+    let server = HttpServer::new(move || {
         App::new()
-            .route("/healthz",web::get().to(health_check))
-
+            .wrap(
+                Cors::default()
+                    .allow_any_origin()
+                    .allow_any_method()
+                    .allow_any_header()
+            )
+            .route("/healthz", web::get().to(health_check))
     })
     .listen(listener)?
-        .run();
+    .run();
 
     Ok(server)
 }

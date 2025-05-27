@@ -23,7 +23,7 @@ CREATE TABLE courses {
     locale smallint NOT NULL, -- default to 0 : English, 1: Bangla
 
     course_thumbnail VARCHAR(150) NULL,
-    
+
     # need to have SEO related fields
     meta_name VARCHAR(100) NULL,
     meta_description TEXT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE courses {
 # coure categories is a many to many relationship
 CREATE TABLE course_categories {
     course_id INT NOT NULL,
-    category_id INT NOT NULL, -- not in db, but const 
+    category_id INT NOT NULL, -- not in db, but const
 }
 
 # tags are same as well, use hardcoded struct
@@ -54,7 +54,7 @@ CREATE TABLE course_tags {
     tag_id INT NOT NULL, -- not in db, but const
 }
 
-CREATE TABLE course_chapters {
+CREATE TABLE course_modules {
     id SERIAL PRIMARY KEY,
     course_id INT NOT NULL,
     name VARCHAR(100) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE lessons {
     thumbnail VARCHAR(255) NULL,
     media_content VARCHAR(1000) NULL, # nullable, could be audio, could be video
     content TEXT NOT NULL,
-    
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
@@ -81,12 +81,12 @@ CREATE TABLE lessons {
     meta_description TEXT NULL,
     meta_keywords TEXT NULL,
     meta_image VARCHAR(255) NULL,
-    
+
     page_layout VARCHAR(100) DEFAULT 'default',
 
     read_time VARCHAR(10) NULL,
     watch_time VARCHAR(10) NULL,
-    
+
     FOREIGN KEY (course_id) REFERENCES courses(id),
     FOREIGN KEY (chapter_id) REFERENCES course_chapters(id)
 }
@@ -102,38 +102,38 @@ CREATE TABLE comments {
     user_id INT NOT NULL,
     lesson_id INT NOT NULL,
     content TEXT NOT NULL,
-    
+
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (lesson_id) REFERENCES lessons(id),
-    
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 }
 
 CREATE TABLE questions {
     id SERIAL PRIMARY KEY,
-    
+
     user_id INT NOT NULL,
     lesson_id INT NOT NULL,
     content TEXT NOT NULL,
 
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (lesson_id) REFERENCES lessons(id),
-    
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 }
 
 CREATE TABLE answers {
     id SERIAL PRIMARY KEY,
-    
+
     user_id INT NOT NULL,
     lesson_id INT NOT NULL,
     content TEXT NOT NULL,
-    
+
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (lesson_id) REFERENCES lessons(id),
-    
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 }
