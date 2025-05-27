@@ -1,4 +1,4 @@
 base_url="http://localhost:8000"
 port=8000
-host="http://localhost"
+host="127.0.0.1"
 
