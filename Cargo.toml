@@ -21,9 +21,17 @@ secrecy = "0.10.3"
 serde = { version = "1.0.219", features = ["derive"] }
 serde-aux = "4.7.0"
 serde_json = "1.0.140"
-sqlx = { version = "0.8.6", default-features = false, features = ["macros", "postgres", "uuid", "chrono", "migrate"] }
+sqlx = { version = "0.8.6", default-features = false, features = [
+    "macros",
+    "postgres",
+    "uuid",
+    "chrono",
+    "migrate",
+    "runtime-tokio-rustls",
+] }
 tokio = { version = "1.45.1", features = ["macros", "rt-multi-thread"] }
 toml = "0.8.22"
+uuid = { version = "1.17.0", features = ["v4"] }
 
 
 [dev-dependencies]

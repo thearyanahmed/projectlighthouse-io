@@ -1,7 +1,8 @@
+mod category;
 mod server;
 mod tag;
-mod category;
 
-pub use server::Api;
-pub use tag::*;
 pub use category::*;
+pub use server::Api;
+pub use server::get_connection_pool;
+pub use tag::*;
