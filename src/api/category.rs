@@ -1,4 +1,4 @@
-use actix_web::{HttpResponse};
+use actix_web::HttpResponse;
 use crate::storer::Category;
 use crate::storer::StaticLookup;
 
