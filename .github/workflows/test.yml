@@ -1,4 +1,4 @@
-name: Test Lighthouse (Backend)
+name: test lighthouse
 
 on:
   push:
