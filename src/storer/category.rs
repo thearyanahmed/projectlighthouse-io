@@ -14,8 +14,8 @@ impl StaticLookup for Category{
     // Thus tags are hardcoded, for now and probably forever.
     fn all() -> Vec<Self> {
         let categories = [
-            Category { id: 1, name: "containers".to_string(), slug: "rust".to_string() },
-            Category { id: 2, name: "go".to_string(), slug: "go".to_string() },
+            Category { id: 1, name: "containers".to_string(), slug: "containers".to_string() },
+            Category { id: 2, name: "kubernetes".to_string(), slug: "kubernetes".to_string() },
         ];
         return categories.to_vec();
     }
@@ -34,7 +34,7 @@ mod tests {
         let categories = Category::all();
         assert_eq!(categories.len(), 2);
         assert_eq!(categories[0].name, "containers");
-        assert_eq!(categories[1].slug, "go");
+        assert_eq!(categories[1].slug, "kubernetes");
     }
 
     #[test]
@@ -45,7 +45,7 @@ mod tests {
 
     #[test]
     fn test_find_by_slug() {
-        let category = Category::find_by_slug("go").expect("Category not found");
+        let category = Category::find_by_slug("kubernetes").expect("Category not found");
         assert_eq!(category.id, 2);
     }
 
