@@ -4,6 +4,7 @@ use actix_web::{App, HttpServer, HttpResponse, web};
 use actix_web::dev::Server;
 use crate::config::AppConfig;
 use crate::api::tag::all_tags;
+use crate::api::category::all_categories;
 use actix_cors::Cors;
 
 pub struct Api {
@@ -45,6 +46,7 @@ fn listen_and_serve(listener: TcpListener) -> Result<Server, std::io::Error> {
             )
             .route("/api/v1/healthz", web::get().to(health_check))
             .route("/api/v1/tags", web::get().to(all_tags))
+            .route("/api/v1/categories", web::get().to(all_categories))
 
     })
     .listen(listener)?

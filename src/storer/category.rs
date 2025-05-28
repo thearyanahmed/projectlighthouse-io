@@ -1,6 +1,7 @@
 use crate::storer::StaticLookup;
+use serde::Serialize;
 
-#[derive(Clone,Debug)]
+#[derive(Serialize, Clone,Debug)]
 pub struct Category {
     pub id: i32,
     pub name: String,
