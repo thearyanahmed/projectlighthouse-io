@@ -8,24 +8,6 @@ pub struct AppConfig {
     pub host: String,
 }
 
-impl AppConfig {
-    pub fn load(env: &str) -> Result<AppConfig> {
-        let config_file = match env {
-            "production" => "production.toml",
-            "test" => "test.toml",
-            _ => "local.toml",
-        };
-
-        let config_content = std::fs::read_to_string(config_file)
-            .unwrap_or_else(|_| panic!("failed to read config file: {}", config_file));
-
-        let config: AppConfig = toml::from_str(&config_content)
-            .unwrap_or_else(|_| panic!("failed to parse config file: {}", config_file));
-
-        Ok(config)
-    }
-}
-
 pub fn get_configuration() -> Result<AppConfig, config::ConfigError> {
     let base_path = std::env::current_dir().expect("failed to determine the current directory.");
     let config_dir = base_path.join("config");

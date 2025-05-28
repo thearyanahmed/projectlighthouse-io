@@ -1,4 +1,5 @@
 use lighthouseio::api::Api;
+use lighthouseio::config::get_configuration;
 
 pub struct TestApp {
     pub address: String,
@@ -7,11 +8,9 @@ pub struct TestApp {
 
 // Spawns an instance of the app. It binds to a random port.
 pub async fn setup_api() -> TestApp {
-    let mut config = lighthouseio::config::AppConfig::load("test").expect("failed to load config");
+    let mut config = get_configuration().expect("failed to get configuration");
 
     config.port = 0; // bind to a random port
-
-    println!("config is {:?}", config);
 
     let app = Api::run(&config)
         .await
