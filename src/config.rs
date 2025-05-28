@@ -11,7 +11,7 @@ pub struct AppConfig {
 pub fn get_configuration() -> Result<AppConfig, config::ConfigError> {
     let base_path = std::env::current_dir().expect("failed to determine the current directory.");
     let config_dir = base_path.join("config");
-    let config_file = config_dir.join("base.toml");
+    let config_file = config_dir.join("base.yml");
 
     let settings = config::Config::builder()
         .add_source(config::File::from(config_file))
