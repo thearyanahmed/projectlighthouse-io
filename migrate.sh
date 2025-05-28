@@ -35,4 +35,5 @@ if ! sqlx database exists --database-url "$DATABASE_URL" >/dev/null 2>&1; then
 fi
 
 sqlx migrate run --source ./migrations
+sqlx migrate info
 echo "postgres has been migrated."
