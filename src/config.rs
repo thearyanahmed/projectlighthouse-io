@@ -1,11 +1,59 @@
 use anyhow::Result;
+use secrecy::{ExposeSecret, SecretString};
+use serde::{Deserialize, Deserializer};
 use serde_aux::field_attributes::deserialize_number_from_string;
+use sqlx::postgres::{PgConnectOptions, PgSslMode};
 
 #[derive(serde::Deserialize, Debug)]
 pub struct AppConfig {
     #[serde(deserialize_with = "deserialize_number_from_string")]
     pub port: u16,
     pub host: String,
+    pub database: DatabaseSettings,
+}
+
+#[derive(serde::Deserialize, Debug)]
+pub struct DatabaseSettings {
+    pub driver: String,
+    pub username: String,
+    #[serde(deserialize_with = "deserialize_secret_string")]
+    pub password: SecretString,
+    #[serde(deserialize_with = "deserialize_number_from_string")]
+    pub port: u16,
+    pub host: String,
+    pub database_name: String,
+    pub require_ssl: bool,
+}
+
+fn deserialize_secret_string<'de, D>(deserializer: D) -> Result<SecretString, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let s = String::deserialize(deserializer)?;
+    Ok(SecretString::new(s.into_boxed_str()))
+}
+
+impl DatabaseSettings {
+    pub fn without_db(&self) -> PgConnectOptions {
+        let ssl_mode = if self.require_ssl {
+            PgSslMode::Require
+        } else {
+            PgSslMode::Prefer
+        };
+
+        PgConnectOptions::new()
+            .host(&self.host)
+            .username(&self.username)
+            .password(&self.password.expose_secret())
+            .port(self.port)
+            .ssl_mode(ssl_mode)
+    }
+
+    pub fn with_db(&self) -> PgConnectOptions {
+        let options = self.without_db().database(&self.database_name);
+
+        options
+    }
 }
 
 pub fn get_configuration() -> Result<AppConfig, config::ConfigError> {

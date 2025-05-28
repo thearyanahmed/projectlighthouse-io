@@ -9,6 +9,8 @@ use config::get_configuration;
 async fn main() -> std::io::Result<()> {
     let cfg = get_configuration().expect("failed to get configuration");
 
+    println!("starting with configuration: {:?}", cfg);
+
     let app = Api::run(&cfg).await.expect("failed to start api server");
 
     println!("server running at: {}", app.address());

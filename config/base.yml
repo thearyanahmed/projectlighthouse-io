@@ -1,3 +1,11 @@
 base_url: "http://localhost:8000"
 port: 8000
 host: "127.0.0.1"
+database:
+  driver: "postgres"
+  host: "localhost"
+  port: 54321
+  username: "postgres"
+  password: "password"
+  database_name: "lighthouse"
+  require_ssl: false
