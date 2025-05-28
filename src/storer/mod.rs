@@ -6,3 +6,4 @@ pub use tag::*;
 pub use lookup::*;
 pub use category::*;
 
+pub use lookup::*;

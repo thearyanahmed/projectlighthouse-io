@@ -1,5 +1,3 @@
-use storer::StaticLookup;
-
 mod storer;
 mod config;
 mod api;

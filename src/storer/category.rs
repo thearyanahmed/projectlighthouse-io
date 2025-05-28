@@ -1,4 +1,4 @@
-use crate::StaticLookup;
+use crate::storer::StaticLookup;
 
 #[derive(Clone,Debug)]
 pub struct Category {
@@ -26,7 +26,7 @@ impl StaticLookup for Category{
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::StaticLookup;
+    use crate::storer::StaticLookup;
 
     #[test]
     fn test_all_categories() {

@@ -3,6 +3,7 @@ use std::net::TcpListener;
 use actix_web::{App, HttpServer, HttpResponse, web};
 use actix_web::dev::Server;
 use crate::config::AppConfig;
+use crate::api::tag::all_tags;
 use actix_cors::Cors;
 
 pub struct Api {
@@ -42,7 +43,9 @@ fn listen_and_serve(listener: TcpListener) -> Result<Server, std::io::Error> {
                     .allow_any_method()
                     .allow_any_header()
             )
-            .route("/healthz", web::get().to(health_check))
+            .route("/api/v1/healthz", web::get().to(health_check))
+            .route("/api/v1/tags", web::get().to(all_tags))
+
     })
     .listen(listener)?
     .run();
