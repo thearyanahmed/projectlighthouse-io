@@ -1,7 +1,7 @@
 use crate::storer::lookup::StaticLookup;
 use serde::Serialize;
 
-#[derive(Serialize, Clone,Debug)]
+#[derive(Serialize, Clone, Debug)]
 pub struct Tag {
     pub id: i32,
     pub name: String,
@@ -12,18 +12,29 @@ impl StaticLookup for Tag {
     // Tags will hardly change. And the change is easy.
     // Better to save calls on database and then thinking about caching.
     // Thus tags are hardcoded, for now and probably forever.
-     fn all() -> Vec<Self> {
+    fn all() -> Vec<Self> {
         let tags = [
-            Tag { id: 1, name: "rust".to_string(), slug: "rust".to_string() },
-            Tag { id: 2, name: "go".to_string(), slug: "go".to_string() },
+            Tag {
+                id: 1,
+                name: "rust".to_string(),
+                slug: "rust".to_string(),
+            },
+            Tag {
+                id: 2,
+                name: "go".to_string(),
+                slug: "go".to_string(),
+            },
         ];
         return tags.to_vec();
     }
 
-    fn id(&self) -> i32 { self.id }
-    fn slug(&self) -> &str { &self.slug }
+    fn id(&self) -> i32 {
+        self.id
+    }
+    fn slug(&self) -> &str {
+        &self.slug
+    }
 }
-
 
 #[cfg(test)]
 mod tests {
