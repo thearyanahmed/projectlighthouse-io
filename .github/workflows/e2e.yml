@@ -30,9 +30,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create config/local.yml
+      - name: Create config/base.yml
         run: |
-            cat <<EOF > config/local.yml
+            cat <<EOF > config/base.yml
             base_url: "http://localhost:8000"
             port: 8000
             host: "127.0.0.1"
@@ -46,8 +46,8 @@ jobs:
               require_ssl: false
             EOF
 
-            echo "printing local.yml"
-            cat config/local.yml
+            echo "printing base.yml"
+            cat config/base.yml
 
       - name: Build
         run: cargo build --verbose
