@@ -9,20 +9,28 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  e2e-test:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: testdb
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U testuser"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Start PostgreSQL
-        uses: postgres-actions/postgres@v1
-        with:
-          postgresql version: '15'
-          postgresql db: testdb
-          postgresql user: testuser
-          postgresql password: testpass
-
-      - name: Write database config to base.toml
+      - name: Create local.toml
         run: |
           cat <<EOF > local.toml
           [database]
@@ -36,5 +44,5 @@ jobs:
       - name: Build
         run: cargo build --verbose
 
-      - name: Run tests
+      - name: Run e2e tests
         run: cargo test --test e2e
