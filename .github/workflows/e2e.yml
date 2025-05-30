@@ -13,7 +13,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Start PostgreSQL
+        uses: postgres-actions/postgres@v1
+        with:
+          postgresql version: '15'
+          postgresql db: testdb
+          postgresql user: testuser
+          postgresql password: testpass
+
+      - name: Write database config to base.toml
+        run: |
+          cat <<EOF > local.toml
+          [database]
+          host = "localhost"
+          port = 5432
+          user = "testuser"
+          password = "testpass"
+          dbname = "testdb"
+          EOF
+
       - name: Build
         run: cargo build --verbose
+
       - name: Run tests
         run: cargo test --test e2e
