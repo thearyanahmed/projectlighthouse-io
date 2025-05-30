@@ -44,11 +44,12 @@ jobs:
       - name: Build
         run: cargo build --verbose
 
-      - name: Migrate database
-        run: |
-          sudo apt-get install libpq-dev -y
-          cargo install sqlx-cli --no-default-features --features postgres
-          sqlx migrate run --database-url "postgres://testuser:testpass@postgres:5432/testdb"
+      # seems like we don't need this actually.
+      # - name: Migrate database
+      #   run: |
+      #     sudo apt-get install libpq-dev -y
+      #     cargo install sqlx-cli --no-default-features --features postgres
+      #     sqlx migrate run --database-url "postgres://testuser:testpass@postgres:5432/testdb"
 
       - name: Run e2e tests
         run: cargo test --test e2e
