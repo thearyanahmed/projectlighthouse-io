@@ -47,7 +47,7 @@ jobs:
       - name: Migrate database
         run: |
           sudo apt-get install libpq-dev -y
-          cargo install --version=0.2.0 sqlx-cli --no-default-features --features postgres
+          cargo install sqlx-cli --no-default-features --features postgres
           sqlx migrate run --database-url "postgres://testuser:testpass@localhost:5432/testdb"
 
       - name: Run e2e tests
