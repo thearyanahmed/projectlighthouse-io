@@ -41,6 +41,9 @@ jobs:
           dbname = "testdb"
           EOF
 
+          echo "printing local.toml"
+          cat local.toml
+
       - name: Build
         run: cargo build --verbose
 
