@@ -43,6 +43,7 @@ pub async fn setup_api() -> TestApp {
 
 // Configures the database. Creates a connection pool and runs migration.
 pub async fn configure_database(config: &DatabaseSettings) -> PgPool {
+    println!("Configuring database: {:?}", config);
     let mut connection = PgConnection::connect_with(&config.without_db())
         .await
         .expect("failed to connect to postgres.");
