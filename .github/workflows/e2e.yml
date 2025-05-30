@@ -34,7 +34,7 @@ jobs:
         run: |
           cat <<EOF > local.toml
           [database]
-          host = "localhost"
+          host = "postgres"
           port = 5432
           user = "testuser"
           password = "testpass"
@@ -43,6 +43,9 @@ jobs:
 
       - name: Build
         run: cargo build --verbose
+
+      - name: Run migrations
+        run: sqlx migrate run --database-url "postgres://testuser:testpass@localhost:5432/testdb"
 
       - name: Run e2e tests
         run: cargo test --test e2e
