@@ -30,9 +30,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create local.yml
+      - name: Create config/local.yml
         run: |
-            cat <<EOF > local.yml
+            cat <<EOF > config/local.yml
             base_url: "http://localhost:8000"
             port: 8000
             host: "127.0.0.1"
