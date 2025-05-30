@@ -30,19 +30,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create local.toml
+      - name: Create local.yml
         run: |
-          cat <<EOF > local.toml
-          [database]
-          host = "postgres"
-          port = 5432
-          user = "testuser"
-          password = "testpass"
-          dbname = "testdb"
-          EOF
+            cat <<EOF > local.yml
+            database:
+              driver: "postgres"
+              host: "postgres"
+              port: 5432
+              username: "testuser"
+              password: "testpass"
+              database_name: "testdb"
+              require_ssl: false
+            EOF
 
-          echo "printing local.toml"
-          cat local.toml
+            echo "printing local.yml"
+            cat local.yml
 
       - name: Build
         run: cargo build --verbose
