@@ -47,7 +47,7 @@ jobs:
             EOF
 
             echo "printing local.yml"
-            cat local.yml
+            cat config/local.yml
 
       - name: Build
         run: cargo build --verbose
