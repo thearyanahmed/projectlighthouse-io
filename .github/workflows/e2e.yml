@@ -41,7 +41,7 @@ jobs:
               host: "localhost"
               port: 5432
               username: "postgres"
-              password: "postgres"
+              password: "testpass"
               database_name: "testdb"
               require_ssl: false
             EOF
