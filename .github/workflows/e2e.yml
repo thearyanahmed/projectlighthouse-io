@@ -40,8 +40,8 @@ jobs:
               driver: "postgres"
               host: "localhost"
               port: 5432
-              username: "testuser"
-              password: "testpass"
+              username: "postgres"
+              password: "postgres"
               database_name: "testdb"
               require_ssl: false
             EOF
