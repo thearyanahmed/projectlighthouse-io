@@ -48,3 +48,32 @@ pub async fn get_courses(pool: &PgPool) -> Result<Vec<Course>> {
 
     Ok(courses)
 }
+
+pub async fn find_course_by_slug(pool: &PgPool, slug: &str) -> Result<Option<Course>> {
+    let course = sqlx::query_as!(
+        Course,
+        r#"
+        SELECT
+            id,
+            name,
+            slug,
+            description,
+            thumbnail,
+            seo_title,
+            seo_description,
+            seo_keywords,
+            seo_image,
+            published_at,
+            created_at,
+            updated_at,
+            deleted_at
+        FROM courses
+        WHERE slug = $1
+        "#,
+        slug
+    )
+    .fetch_optional(pool)
+    .await?;
+
+    Ok(course)
+}

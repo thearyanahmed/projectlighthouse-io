@@ -1,5 +1,5 @@
 use crate::ohara::Course;
-use crate::ohara::get_courses;
+use crate::ohara::{find_course_by_slug, get_courses};
 use actix_web::HttpResponse;
 use actix_web::http::header::ContentType;
 use actix_web::web;
@@ -20,11 +20,7 @@ pub async fn get_course_by_slug(pool: web::Data<PgPool>, slug: web::Path<String>
         return HttpResponse::NotFound().finish();
     }
 
-    let course = get_courses(&pool)
-        .await
-        .unwrap_or_else(|_| Vec::new())
-        .into_iter()
-        .find(|c| c.slug == slug);
+    let course = find_course_by_slug(&pool, &slug).await.unwrap_or(None);
 
     match course {
         Some(course) => HttpResponse::Ok()
