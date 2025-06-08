@@ -1,13 +1,7 @@
 import { get_healthz, retrieve_course_by_slug } from '$lib/api';
-import { fakeCourse } from '$lib/fake';
-import type { Lesson } from '$lib/types';
 import type { PageLoad } from './$types';
 
-
 export const load: PageLoad = async ({ fetch, params }) => {
-    const result = await get_healthz();
-    const { data: health } = result;
-
     // const { data: course, error } = await retrieve_course_by_slug('cli-apps-go-not-found');
 
     // if (error) {
@@ -15,6 +9,6 @@ export const load: PageLoad = async ({ fetch, params }) => {
     // }
 
     return {
-        health,
+
     };
 };
