@@ -1,3 +1,7 @@
+export type Healthz = {
+    status: string;
+}
+
 export type User = {
     id: number;
     name: string;

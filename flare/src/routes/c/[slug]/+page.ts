@@ -1,21 +1,20 @@
+import { get_healthz, retrieve_course_by_slug } from '$lib/api';
 import { fakeCourse } from '$lib/fake';
 import type { Lesson } from '$lib/types';
 import type { PageLoad } from './$types';
 
+
 export const load: PageLoad = async ({ fetch, params }) => {
+    const result = await get_healthz();
+    const { data: health } = result;
 
-    const res = await fetch(`http://127.0.0.1:8000/healthz`);
-    if (!res.ok) {
-        throw new Error('Failed to fetch health information');
-    }
-    const health = await res.json();
+    // const { data: course, error } = await retrieve_course_by_slug('cli-apps-go-not-found');
 
-    const course = fakeCourse();
-
-    const lesson: Lesson = await new Promise((resolve) => setTimeout(() => resolve(course.chapters[0].lessons[0]), 500));
+    // if (error) {
+    //     return { lesson: null, health, course: null, error };
+    // }
 
     return {
-        lesson,
         health,
     };
 };

@@ -1,12 +1,13 @@
-import { fakeCourse } from '$lib/fake';
-import type { Course } from '$lib/types';
-import type { LayoutServerLoad } from './$types';
+// import type { LayoutServerLoad } from './$types';
+// import { retrieve_course_by_slug } from '$lib/api';
+// import type { ViewCourseResponse } from '$lib/api_response_types';
 
-export const load: LayoutServerLoad = async () => {
+// export const load: LayoutServerLoad = async ({ params }) => {
+//     const result = await retrieve_course_by_slug('cli-apps-go');
 
-    const course: Course = await new Promise((resolve) => setTimeout(() => resolve(fakeCourse()), 500));
+//     if (result.error) {
+//         return { course: null, error: result.error };
+//     }
 
-    return {
-        course,
-    };
-};
+//     return { course: result.data as ViewCourseResponse, error: null };
+// };

@@ -5,13 +5,20 @@
 </script>
 
 <div>
-    Title is : {data.lesson.title}
     Current API health status (coming from api)
-    <span
-        class="p-2 rounded-md text-white"
-        class:bg-green-600={data.health.status === "ok"}
-        class:bg-red-600={data.health.status !== "ok"}
-    >
-        {data.health.status}
-    </span>
+    {#if data.error}
+        <span class="p-2 rounded-md bg-red-700 text-white"
+            >{data.error.message}</span
+        >
+    {:else if data.health}
+        <span
+            class="p-2 rounded-md text-white"
+            class:bg-green-600={data.health.status === "ok"}
+            class:bg-red-600={data.health.status !== "ok"}
+        >
+            {data.health.status}
+        </span>
+    {:else}
+        <span class="p-2 rounded-md bg-gray-400 text-white"> Unknown </span>
+    {/if}
 </div>
