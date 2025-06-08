@@ -2,7 +2,9 @@ use crate::api::category::all_categories;
 use crate::api::tag::all_tags;
 use crate::config::AppConfig;
 use crate::config::DatabaseSettings;
+use crate::ohara::all_courses;
 use crate::ohara::hello_world;
+
 use actix_cors::Cors;
 use actix_web::dev::Server;
 use actix_web::web::Data;
@@ -55,8 +57,6 @@ pub fn get_connection_pool(configuration: &DatabaseSettings) -> PgPool {
 fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, std::io::Error> {
     let db_pool = Data::new(db_pool);
 
-    hello_world();
-
     let server = HttpServer::new(move || {
         App::new()
             .wrap(
@@ -69,7 +69,11 @@ fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, st
                 web::scope("/api/v1")
                     .route("/healthz", web::get().to(health_check))
                     .route("/tags", web::get().to(all_tags))
-                    .route("/categories", web::get().to(all_categories)),
+                    .route("/categories", web::get().to(all_categories))
+                    .service(
+                        web::scope("/courses").route("", web::get().to(all_courses)),
+                        // .route("/{slug}", web::get().to(all_courses)),
+                    ),
             )
             .app_data(db_pool.clone())
     })

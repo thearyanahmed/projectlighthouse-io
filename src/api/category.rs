@@ -1,6 +1,6 @@
-use actix_web::HttpResponse;
 use crate::storer::Category;
 use crate::storer::StaticLookup;
+use actix_web::HttpResponse;
 
 pub async fn all_categories() -> HttpResponse {
     let categories = Category::all();

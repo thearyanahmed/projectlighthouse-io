@@ -1,6 +1,8 @@
+use serde::Serialize;
 use sqlx::types::chrono;
 use sqlx::{PgPool, Result};
 
+#[derive(Serialize)]
 pub struct Course {
     pub id: i32,
     pub name: String,
