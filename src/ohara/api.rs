@@ -1,3 +1,5 @@
+use crate::api::CacheControl;
+use crate::api::cache_control_header;
 use crate::ohara::Course;
 use crate::ohara::ViewCourseResponse;
 use crate::ohara::{
@@ -49,6 +51,8 @@ pub async fn get_course_by_slug(pool: web::Data<PgPool>, slug: web::Path<String>
     };
 
     HttpResponse::Ok()
+        .insert_header(("Cache-Control", "public, max-age=30"))
+        .insert_header(cache_control_header(CacheControl::MaxAge(60)))
         .content_type(ContentType::json())
         .json(course_response)
 }
