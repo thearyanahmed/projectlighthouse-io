@@ -2,7 +2,7 @@ use crate::api::category::all_categories;
 use crate::api::tag::all_tags;
 use crate::config::AppConfig;
 use crate::config::DatabaseSettings;
-use crate::course::hello_world;
+use crate::ohara::hello_world;
 use actix_cors::Cors;
 use actix_web::dev::Server;
 use actix_web::web::Data;
@@ -15,6 +15,7 @@ use std::net::TcpListener;
 pub struct Api {
     server: Server,
     address: String,
+    port: u16,
 }
 
 impl Api {
@@ -24,13 +25,22 @@ impl Api {
         let connection_pool = get_connection_pool(&cfg.database);
 
         let listener = TcpListener::bind(&address)?;
+        let port = listener.local_addr().unwrap().port();
         let server = listen_and_serve(listener, connection_pool)?;
 
-        Ok(Api { server, address })
+        Ok(Api {
+            server,
+            address,
+            port,
+        })
     }
 
     pub fn address(&self) -> &str {
         &self.address
+    }
+
+    pub fn port(&self) -> u16 {
+        self.port
     }
 
     pub async fn run_until_stopped(self) -> Result<(), std::io::Error> {

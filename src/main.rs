@@ -1,6 +1,6 @@
 mod api;
 mod config;
-mod course;
+mod ohara;
 mod storer;
 
 use api::Api;
