@@ -48,7 +48,3 @@ pub async fn get_courses(pool: &PgPool) -> Result<Vec<Course>> {
 
     Ok(courses)
 }
-
-pub fn hello_world() {
-    println!("Hello, world!");
-}

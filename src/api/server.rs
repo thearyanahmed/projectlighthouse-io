@@ -3,8 +3,6 @@ use crate::api::tag::all_tags;
 use crate::config::AppConfig;
 use crate::config::DatabaseSettings;
 use crate::ohara::all_courses;
-use crate::ohara::hello_world;
-
 use actix_cors::Cors;
 use actix_web::dev::Server;
 use actix_web::web::Data;
