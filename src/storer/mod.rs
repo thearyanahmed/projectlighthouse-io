@@ -1,9 +1,7 @@
-mod tag;
 mod category;
 mod lookup;
+mod tag;
 
-pub use tag::*;
-pub use lookup::*;
 pub use category::*;
-
 pub use lookup::*;
+pub use tag::*;
