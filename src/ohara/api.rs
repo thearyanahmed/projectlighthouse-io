@@ -25,6 +25,10 @@ pub async fn get_course_by_slug(pool: web::Data<PgPool>, slug: web::Path<String>
 
     let course = find_course_by_slug(&pool, &slug).await.unwrap_or(None);
 
+    if course.is_none() {
+        return HttpResponse::NotFound().finish();
+    }
+
     let modules = match course {
         Some(ref course) => find_modules_by_course_id(&pool, course.id)
             .await
