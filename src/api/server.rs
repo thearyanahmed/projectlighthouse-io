@@ -2,7 +2,7 @@ use crate::api::category::all_categories;
 use crate::api::tag::all_tags;
 use crate::config::AppConfig;
 use crate::config::DatabaseSettings;
-use crate::ohara::all_courses;
+use crate::ohara::{all_courses, get_course_by_slug};
 use actix_cors::Cors;
 use actix_web::dev::Server;
 use actix_web::web::Data;
@@ -69,8 +69,9 @@ fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, st
                     .route("/tags", web::get().to(all_tags))
                     .route("/categories", web::get().to(all_categories))
                     .service(
-                        web::scope("/courses").route("", web::get().to(all_courses)),
-                        // .route("/{slug}", web::get().to(all_courses)),
+                        web::scope("/courses")
+                            .route("", web::get().to(all_courses))
+                            .route("/{slug}", web::get().to(get_course_by_slug)),
                     ),
             )
             .app_data(db_pool.clone())
