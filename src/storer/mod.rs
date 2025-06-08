@@ -1,5 +1,7 @@
 mod category;
+mod lesson;
 mod lookup;
+mod module;
 mod tag;
 
 pub use category::*;

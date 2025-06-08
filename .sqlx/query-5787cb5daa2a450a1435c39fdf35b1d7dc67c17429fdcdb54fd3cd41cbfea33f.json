@@ -1,0 +1,92 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            id,\n            name,\n            slug,\n            description,\n            thumbnail,\n            seo_title,\n            seo_description,\n            seo_keywords,\n            seo_image,\n            published_at,\n            created_at,\n            updated_at,\n            deleted_at\n        FROM courses\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 2,
+        "name": "slug",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 3,
+        "name": "description",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "thumbnail",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 5,
+        "name": "seo_title",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 6,
+        "name": "seo_description",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 7,
+        "name": "seo_keywords",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 8,
+        "name": "seo_image",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 9,
+        "name": "published_at",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 10,
+        "name": "created_at",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 11,
+        "name": "updated_at",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 12,
+        "name": "deleted_at",
+        "type_info": "Timestamp"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ]
+  },
+  "hash": "5787cb5daa2a450a1435c39fdf35b1d7dc67c17429fdcdb54fd3cd41cbfea33f"
+}

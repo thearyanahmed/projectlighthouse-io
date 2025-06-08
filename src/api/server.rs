@@ -2,13 +2,13 @@ use crate::api::category::all_categories;
 use crate::api::tag::all_tags;
 use crate::config::AppConfig;
 use crate::config::DatabaseSettings;
+use crate::course::hello_world;
 use actix_cors::Cors;
 use actix_web::dev::Server;
 use actix_web::web::Data;
 use actix_web::{App, HttpResponse, HttpServer, web};
 use anyhow::Result;
 use sqlx::PgPool;
-use sqlx::database;
 use sqlx::postgres::PgPoolOptions;
 use std::net::TcpListener;
 
@@ -54,6 +54,8 @@ pub fn get_connection_pool(configuration: &DatabaseSettings) -> PgPool {
 
 fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, std::io::Error> {
     let db_pool = Data::new(db_pool);
+
+    hello_world();
 
     let server = HttpServer::new(move || {
         App::new()

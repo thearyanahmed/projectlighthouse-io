@@ -1,5 +1,6 @@
 mod api;
 mod config;
+mod course;
 mod storer;
 
 use api::Api;

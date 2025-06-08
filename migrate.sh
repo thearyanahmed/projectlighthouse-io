@@ -29,11 +29,13 @@ until docker inspect --format='{{.State.Health.Status}}' postgres | grep -q heal
 done
 
 echo "Postgres is up and running on ${DATABASE_URL}!"
+export DATABASE_URL="${DATABASE_URL}"
 
 if ! sqlx database exists --database-url "$DATABASE_URL" >/dev/null 2>&1; then
 	sqlx database create
 fi
 
 sqlx migrate run --source ./migrations
+cargo sqlx prepare
 sqlx migrate info
 echo "postgres has been migrated."
