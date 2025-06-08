@@ -1,5 +1,4 @@
 use crate::setup::setup_api;
-use reqwest::Response;
 
 #[tokio::test]
 async fn health_check_works() {
