@@ -1,2 +1,3 @@
-mod setup;
+mod courses;
 mod health;
+mod setup;
