@@ -65,9 +65,12 @@ fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, st
                     .allow_any_method()
                     .allow_any_header(),
             )
-            .route("/api/v1/healthz", web::get().to(health_check))
-            .route("/api/v1/tags", web::get().to(all_tags))
-            .route("/api/v1/categories", web::get().to(all_categories))
+            .service(
+                web::scope("/api/v1")
+                    .route("/healthz", web::get().to(health_check))
+                    .route("/tags", web::get().to(all_tags))
+                    .route("/categories", web::get().to(all_categories)),
+            )
             .app_data(db_pool.clone())
     })
     .listen(listener)?

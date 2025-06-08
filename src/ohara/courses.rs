@@ -38,6 +38,7 @@ pub async fn get_courses(pool: &PgPool) -> Result<Vec<Course>> {
             updated_at,
             deleted_at
         FROM courses
+        LIMIT 10
         "#
     )
     .fetch_all(pool)
