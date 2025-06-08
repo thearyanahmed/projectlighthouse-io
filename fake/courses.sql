@@ -4,7 +4,8 @@ VALUES (
   'Command Line Applications in Go',
   'cli-apps-go',
   'Learn Go by building powerful CLI tools—from file handling to TUI apps and networking.',
-  NULL, NULL, NULL, NULL, NULL,
+  'https://assets.dreamsofcode.io/courses/cli-apps-go.jpg',
+  NULL, NULL, NULL, NULL,
   NOW(), NOW(), NOW()
 );
 
