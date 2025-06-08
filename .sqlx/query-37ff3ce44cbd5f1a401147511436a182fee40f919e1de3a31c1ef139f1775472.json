@@ -1,0 +1,112 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT\n            id,\n            course_id,\n            module_id,\n            name,\n            media_url,\n            content,\n            created_at,\n            updated_at,\n            deleted_at,\n            meta_name,\n            meta_description,\n            meta_keywords,\n            meta_image,\n            page_layout,\n            read_time,\n            watch_time\n        FROM lessons\n        WHERE course_id = $1\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "course_id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 2,
+        "name": "module_id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 3,
+        "name": "name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "media_url",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 5,
+        "name": "content",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 6,
+        "name": "created_at",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 7,
+        "name": "updated_at",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 8,
+        "name": "deleted_at",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 9,
+        "name": "meta_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 10,
+        "name": "meta_description",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 11,
+        "name": "meta_keywords",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 12,
+        "name": "meta_image",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 13,
+        "name": "page_layout",
+        "type_info": "Int2"
+      },
+      {
+        "ordinal": 14,
+        "name": "read_time",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 15,
+        "name": "watch_time",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true
+    ]
+  },
+  "hash": "37ff3ce44cbd5f1a401147511436a182fee40f919e1de3a31c1ef139f1775472"
+}
