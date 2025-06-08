@@ -1,4 +1,4 @@
-import type { ViewCourseResponse } from "./api_response_types";
+import type { ViewCourseResponse, ViewLessonResponse } from "./api_response_types";
 
 export type CourseMetadataCount = {
     lessons: number;
@@ -57,3 +57,12 @@ function format_duration(totalDuration: number): string {
     return parts.join(" ");
 }
 
+export function lesson_duration(lesson: ViewLessonResponse): string {
+    if (!lesson.watch_time && !lesson.read_time) return "";
+
+    if (lesson.watch_time) {
+        return lesson.watch_time as string
+    }
+
+    return lesson.read_time as string
+}
