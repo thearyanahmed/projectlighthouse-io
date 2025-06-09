@@ -1,3 +1,5 @@
+use actix_web::middleware::Logger;
+use env_logger::Env;
 mod api;
 mod config;
 mod ohara;
@@ -9,8 +11,7 @@ use config::get_configuration;
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     let cfg = get_configuration().expect("failed to get configuration");
-
-    println!("starting with configuration: {:?}", cfg);
+    env_logger::init_from_env(Env::default().default_filter_or("info"));
 
     let app = Api::run(&cfg).await.expect("failed to start api server");
 

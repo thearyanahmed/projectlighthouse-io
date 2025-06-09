@@ -18,6 +18,7 @@ anyhow = "1.0.98"
 argon2 = "0.5.3"
 chrono = { version = "0.4.41", features = ["serde"] }
 config = "0.15.11"
+env_logger = "0.11.8"
 log = "0.4.27"
 secrecy = "0.10.3"
 serde = { version = "1.0.219", features = ["derive"] }
