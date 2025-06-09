@@ -5,6 +5,7 @@ use crate::config::DatabaseSettings;
 use crate::ohara::{all_courses, get_course_by_slug};
 use actix_cors::Cors;
 use actix_web::dev::Server;
+use actix_web::middleware;
 use actix_web::web::Data;
 use actix_web::{App, HttpResponse, HttpServer, web};
 use anyhow::Result;
@@ -61,7 +62,10 @@ fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, st
                 Cors::default()
                     .allow_any_origin()
                     .allow_any_method()
-                    .allow_any_header(),
+                    .allow_any_header()
+            )
+            .wrap(
+                middleware::NormalizePath::trim()
             )
             .service(
                 web::scope("/api/v1")
@@ -71,7 +75,7 @@ fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, st
                     .service(
                         web::scope("/courses")
                             .route("", web::get().to(all_courses))
-                            .route("/{slug}", web::get().to(get_course_by_slug)),
+                            .route("/{slug}", web::get().to(get_course_by_slug))
                     ),
             )
             .app_data(db_pool.clone())
