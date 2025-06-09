@@ -1,3 +1,7 @@
+DELETE FROM lessons;
+DELETE FROM modules;
+DELETE FROM courses;
+
 -- Insert the course
 INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, published_at, created_at, updated_at)
 VALUES (
