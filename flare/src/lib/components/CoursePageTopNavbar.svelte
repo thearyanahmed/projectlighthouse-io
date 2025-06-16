@@ -14,9 +14,8 @@
     <div
         class="flex gap-x-6 text-sm/6 text-gray-950 max-lg:hidden dark:text-white"
     >
-        <a href="/">Course</a><a href="/interviews">Interviews</a><a
-            href="/resources">Resources</a
-        ><button
+        <a href="/">Course</a>
+        <a href="/resources">Resources</a><button
             class="inline-flex items-center gap-x-2 focus:not-data-focus:outline-none"
             id="headlessui-menu-button-«r10»"
             type="button"
