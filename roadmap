@@ -1,0 +1,131 @@
+
+# Comprehensive Go Developer Course: From Basics to Production
+
+## Core Go Fundamentals
+### Introduction to Golang
+- Introduction to Go / Why Golang / Consider Golang
+- Setting up environment
+- Go 101: Values, Variables & Data Types
+- Scalar data types: int, float, rune
+- Compound data types: Array, slice, map
+- Overflow issues
+- Go 101: Control Flow & Loops
+- If-then-else statements
+- Switch statements
+- Loops
+- Go 101: Functions
+- Defining and calling functions
+- Multiple return values
+- Go 101: Error Handling
+- fmt.Errorf()
+- Error wrapping
+- Go 101: Your First Program
+- Write a program e.g. Morse code LED simulation
+- Go Language Nuances
+- Difference in make(), var, and :=
+- Go 101: Introduction to Packages
+- Show standard Golang packages
+- Show example external packages e.g. Cloudflare package
+
+## File Operations & CLI Development
+### Working with Files & CLI Tools
+- Reading from Files
+- Read from a file
+- Introduction to structs
+- Basic data aggregation e.g. counting lines
+- Basic Testing in Go
+- Introduction to simple unit testing
+- Building CLI Applications
+- Create a CLI program
+- Add flags for arguments
+- Robust Error Handling in CLIs
+- Proper error handling
+- Testing error paths
+- Proper exit codes (refer to HTTP Status Codes for context)
+- Advanced File IO & Decoupling
+- Unicode and runes
+- Handling multiple errors gracefully
+- Decoupling with io.Reader
+
+## Concurrency & Performance Optimization
+### Concurrency & Performance (The 1 Billion Rows Challenge)
+- Reading Large Files Efficiently
+- Read large files
+- Parallelism in Go
+- Introduction to concurrency
+- Channels for communication
+- Mutexes for shared state protection
+- Making concurrent code parallel
+- Go Profiling Tools
+- Introduction to profiling tools (pprof)
+- CPU, memory, and blocking profiles
+
+## Building Web Services
+### Building an HTTP Server (Mini Project Focus: journalctl viewer)
+- Simple HTTP Server Basics
+- Create an HTTP server
+- JSON encoding
+- http.HandleFunc and routing
+- Importance of early returns in handlers
+- Proper HTTP Error Handling
+- Returning appropriate HTTP status codes
+- Informative error responses
+
+### Building a Web Application (Pokemon Game Web App)
+- REST API Design & Implementation
+- Designing RESTful endpoints
+- Implementing CRUD operations
+- gRPC for Internal Services
+- Setting up a gRPC server e.g. for an auth service
+- gRPC client implementation
+- Containerization
+- Dockerizing Go applications
+- Production-grade Docker images (multi-stage builds)
+- End-to-End Testing
+- Strategies for E2E tests
+- Tools for E2E testing
+- Role-Based Access Control (RBAC)
+- Implementing authorization logic
+- Integrating with authentication
+- Automated API Documentation
+- Generating OpenAPI/Swagger documentation
+- Integrating documentation tools
+- Kubernetes Deployment
+- Understanding Kubernetes primitives (Pods, Deployments, Services)
+- Deploying services to Kubernetes
+- Production-Grade Kubernetes Deployment
+- Advanced deployment strategies
+- Resource limits and requests
+- Health checks (liveness, readiness)
+- Horizontal Pod Autoscaling
+- Rollback Strategies
+- Implementing safe rollback procedures
+- Managing application versions
+- Cross-Origin Resource Sharing (CORS)
+- Understanding CORS policies
+- Configuring CORS in Go HTTP servers
+
+## Algorithmic Foundations
+### Data Structures & Algorithms (Parallel Learning Path)
+- Arrays & Slices
+- Operations on arrays and slices
+- Linked Lists
+- Single and double linked lists
+- Recursion
+- Understanding recursive functions
+- Sorting Algorithms
+- Common sorting algorithms e.g. bubble, quick, merge
+- Binary Search Trees (BST)
+- Properties and operations
+- Trees (General)
+- Tree traversals
+- Backtracking
+- Solving combinatorial problems
+- Hashmaps
+- Hashing principles and map usage
+- Dynamic Programming (DP)
+- Introduction to DP
+- Graphs
+- Graph representations and traversals
+- Bit Manipulation
+- Basic bitwise operations and applications
