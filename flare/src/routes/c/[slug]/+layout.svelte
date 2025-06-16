@@ -27,10 +27,9 @@
 								>
 									<a
 										class="aria-[current=page]:font-medium aria-[current=page]:text-gray-950 dark:aria-[current=page]:text-white"
-										href={"#" +
-											lesson.name
-												.replace(/\s+/g, "-")
-												.toLowerCase()}
+										href={`/c/${data.course.slug}/learn/${lesson.id}/#${lesson.name
+											.replace(/\s+/g, "-")
+											.toLowerCase()}`}
 									>
 										{lesson.name}
 									</a>

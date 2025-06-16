@@ -51,3 +51,7 @@ export async function get_healthz(): Promise<ApiResult<Healthz>> {
 export async function retrieve_course_by_slug(slug: string): Promise<ApiResult<ViewCourseResponse>> {
     return get<ViewCourseResponse>('courses/' + slug);
 }
+
+export async function retrieve_lesson_by_id(id: number): Promise<ApiResult<ViewCourseResponse>> {
+    return get<ViewCourseResponse>('lessons/' + id);
+}

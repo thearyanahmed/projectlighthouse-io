@@ -62,7 +62,7 @@
                                             d="M13.5 12.5V.5H4.5M13.5 12.5l-.26.39c-.45.67-.45 1.48 0 2.15l.26.46H4c-.83 0-1.5-.67-1.5-1.5v0M13.5 12.5H4.5M2.5 14V2.5C2.5 1.4 3.4.5 4.5.5v0M2.5 14c0-.83.67-1.5 1.5-1.5h.5M4.5.5v12"
                                             stroke-linejoin="round"
                                         ></path></svg
-                                    >{course_metadata.modules}<!-- --> modules
+                                    >{course_metadata.modules}  modules
                                 </div>
                                 <span
                                     class="hidden text-gray-950/25 sm:inline dark:text-white/25"
@@ -76,7 +76,7 @@
                                         ><path
                                             d="M10.5 4.5H6.5c-.55 0-1 .45-1 1v6m4-7h3c.55 0 1 .45 1 1v9c0 .55-.45 1-1 1H6.5c-.55 0-1-.45-1-1v-3m4-7V1.5c0-.55-.45-1-1-1h-7c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h3"
                                         ></path></svg
-                                    >{course_metadata.lessons}<!-- --> lessons
+                                    >{course_metadata.lessons} lessons
                                 </div>
                                 <span
                                     class="hidden text-gray-950/25 sm:inline dark:text-white/25"
@@ -160,7 +160,9 @@
                                                         <div class="flow-root">
                                                             <a
                                                                 class="-mx-3 -my-2 flex gap-3 rounded-xl px-3 py-2 text-sm/7 hover:bg-gray-950/4 dark:hover:bg-white/5"
-                                                                href="/landscape-of-choice"
+                                                                href={`/c/${course.slug}/learn/${lesson.id}/#${lesson.name
+                                                                    .replace(/\s+/g, "-")
+                                                                    .toLowerCase()}`}
                                                                 ><div
                                                                     class="flex h-lh shrink items-center"
                                                                 >
