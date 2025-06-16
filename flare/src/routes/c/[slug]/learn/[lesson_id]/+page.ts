@@ -1,17 +1,24 @@
-import { get_healthz, retrieve_course_by_slug } from '$lib/api';
+import { retrieve_lesson_by_id } from '$lib/api';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async ({ fetch, params }) => {
     const { lesson_id } = params;
 
-    console.log("lesson_id", lesson_id);
-    // const { data: course, error } = await retrieve_course_by_slug('cli-apps-go-not-found');
+    if (!lesson_id) {
+        return { lesson: null, course: null, error: new Error('Lesson ID is required') };
+    }
 
-    // if (error) {
-    //     return { lesson: null, health, course: null, error };
-    // }
+    const lessonIdNum = Number(lesson_id);
+    if (isNaN(lessonIdNum)) {
+        return { lesson: null, course: null, error: new Error('Lesson ID must be a valid number') };
+    }
 
-    return {
+    const { data: lesson, error } = await retrieve_lesson_by_id(lessonIdNum);
 
+    if (error) {
+        return {
+            lesson: lesson,
+            error: null
+        };
     };
 };
