@@ -8,7 +8,9 @@ use crate::ohara::{
 };
 use actix_web::HttpResponse;
 use actix_web::http::header::ContentType;
+use actix_web::http::header::EntityTag;
 use actix_web::web;
+use chrono::{DateTime, Utc};
 use sqlx::PgPool;
 
 pub async fn all_courses(pool: web::Data<PgPool>) -> HttpResponse {
@@ -67,7 +69,12 @@ pub async fn get_lesson_by_id(pool: web::Data<PgPool>, id: web::Path<i32>) -> Ht
     let lesson = find_lesson_by_id(&pool, id).await;
 
     match lesson {
-        Ok(Some(lesson)) => HttpResponse::Ok().json(lesson),
+        Ok(Some(lesson)) => {
+            // let etag_value = lesson.updated_at.to_rfc3339(); // Convert to standard string format
+            // let etag = EntityTag::new(false, etag_value);
+
+            HttpResponse::Ok().json(lesson)
+        }
         Ok(None) => HttpResponse::NotFound().finish(),
         Err(_) => HttpResponse::InternalServerError().finish(),
     }

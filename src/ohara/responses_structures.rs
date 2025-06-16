@@ -65,7 +65,7 @@ impl ViewLessonResponse {
             media_url: lesson.media_url,
             content: lesson.content,
 
-            created_at: lesson.created_at,
+            created_at: Some(lesson.created_at),
             updated_at: lesson.updated_at,
             deleted_at: lesson.deleted_at,
 
