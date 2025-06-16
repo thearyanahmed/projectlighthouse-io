@@ -13,7 +13,7 @@ export const load: PageLoad = async ({ fetch, params }) => {
         return { lesson: null, course: null, error: new Error('Lesson ID must be a valid number') };
     }
 
-    const { data: lesson, error } = await retrieve_lesson_by_id(lessonIdNum);
+    const { data: lesson, error } = await retrieve_lesson_by_id(lessonIdNum, fetch);
 
     if (error) {
         return {
