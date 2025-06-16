@@ -30,6 +30,7 @@
 										href={`/c/${data.course.slug}/learn/${lesson.id}/#${lesson.name
 											.replace(/\s+/g, "-")
 											.toLowerCase()}`}
+										data-sveltekit-preload-data="off"
 									>
 										{lesson.name}
 									</a>
