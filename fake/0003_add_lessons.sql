@@ -95,7 +95,7 @@ impl LucyError {
 }
 ```
 
-## Implement Lucy
+### Implement Lucy
 Our simple Lucy needs to be instantiated with a datastore , which can be selected from the outside.
 
 ```rust
@@ -152,7 +152,7 @@ for record in lucy.all() {
 ```
 It’s a very simple API. Let’s implement the RedisStore to satisfy Datastore trait.
 
-## Implement RedisStore
+### Implement RedisStore
 
 Our redis store for only holds a connect for now. We use the conventional new function to return an new instance that has the connection to communicate with redis.
 
@@ -266,7 +266,7 @@ And that does it. This is the core. Using it with a REST api, gRPC or even build
 The following logic was using to generate uuid of a given length.
 
 
-## Generate UUID
+### Generate UUID
 
 ```rust
 let unique_string: String = rand::thread_rng()
