@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS lessons (
     media_url VARCHAR(1000) NULL, -- nullable, could be audio, could be video
     content TEXT NULL,
 
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL,
     deleted_at TIMESTAMP NULL,
 
     meta_name VARCHAR(100) NULL,
