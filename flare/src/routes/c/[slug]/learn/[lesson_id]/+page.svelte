@@ -1,14 +1,52 @@
 <script lang="ts">
-    import { marked } from "marked";
+    import { marked, type Tokens } from "marked";
     import type { PageProps } from "./$types";
 
     const { data }: PageProps = $props();
 
-    let renderedContent: string | null = $derived(
-        data.lesson?.content
-            ? (marked.parse(data.lesson.content) as string)
-            : null,
-    );
+    interface Heading {
+        text: string;
+        id: string;
+        level: number;
+    }
+
+    let headings: Heading[] = [];
+    let slugCounts = new Map<string, number>();
+
+    function slugify(text: string): string {
+        let slug = text
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9\s]/g, "")
+            .replace(/\s+/g, "-");
+
+        const count = slugCounts.get(slug) ?? 0;
+        slugCounts.set(slug, count + 1);
+        if (count > 0) slug += `-${count}`;
+
+        return slug;
+    }
+
+    const renderer = {
+        heading({ tokens, depth }: Tokens.Heading): string {
+            const text = tokens
+                .map((t) => t.raw)
+                .join("")
+                .trim();
+            const id = slugify(text);
+            headings.push({ text, id, level: depth });
+            return `<h${depth} id="${id}">${text}</h${depth}>`;
+        },
+    };
+
+    marked.use({ renderer });
+
+    slugCounts.clear();
+    headings = [];
+
+    let renderedContent: string | null = data.lesson?.content
+        ? (marked.parse(data.lesson.content) as string)
+        : null;
 </script>
 
 <div class="px-4 sm:px-6">
@@ -37,13 +75,15 @@
                             {data.lesson?.name}
                         </h1>
 
-                        {#if renderedContent}
-                            {@html renderedContent}
-                        {:else if data.lesson?.content === null}
-                            <p>No content provided for this lesson.</p>
-                        {:else}
-                            <p>Loading content...</p>
-                        {/if}
+                        <div id="lesson-content">
+                            {#if renderedContent}
+                                {@html renderedContent}
+                            {:else if data.lesson?.content === null}
+                                <p>No content provided for this lesson.</p>
+                            {:else}
+                                <p>Loading content...</p>
+                            {/if}
+                        </div>
                     </div>
                     <div
                         class="mt-16 border-t border-gray-200 pt-8 dark:border-white/10"
