@@ -1,0 +1,112 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n        SELECT id, course_id, module_id, name, media_url, content, created_at, updated_at, deleted_at,\n               meta_name, meta_description, meta_keywords, meta_image, page_layout, read_time, watch_time\n        FROM lessons\n        WHERE id = $1\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 1,
+        "name": "course_id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 2,
+        "name": "module_id",
+        "type_info": "Int4"
+      },
+      {
+        "ordinal": 3,
+        "name": "name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "media_url",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 5,
+        "name": "content",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 6,
+        "name": "created_at",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 7,
+        "name": "updated_at",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 8,
+        "name": "deleted_at",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 9,
+        "name": "meta_name",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 10,
+        "name": "meta_description",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 11,
+        "name": "meta_keywords",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 12,
+        "name": "meta_image",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 13,
+        "name": "page_layout",
+        "type_info": "Int2"
+      },
+      {
+        "ordinal": 14,
+        "name": "read_time",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 15,
+        "name": "watch_time",
+        "type_info": "Varchar"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false,
+      true,
+      true
+    ]
+  },
+  "hash": "b6261f012ee57730897d98d5bd3bb4d45bd3475ca12df35ac98706fe4ee9f2be"
+}

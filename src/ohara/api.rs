@@ -2,6 +2,7 @@ use crate::api::CacheControl;
 use crate::api::cache_control_header;
 use crate::ohara::Course;
 use crate::ohara::ViewCourseResponse;
+use crate::ohara::find_lesson_by_id;
 use crate::ohara::{
     find_course_by_slug, find_modules_by_course_id, get_courses, get_lessons_by_course_id,
 };
@@ -54,4 +55,20 @@ pub async fn get_course_by_slug(pool: web::Data<PgPool>, slug: web::Path<String>
         .insert_header(cache_control_header(CacheControl::MaxAge(60)))
         .content_type(ContentType::json())
         .json(course_response)
+}
+
+pub async fn get_lesson_by_id(pool: web::Data<PgPool>, id: web::Path<i32>) -> HttpResponse {
+    let id = id.into_inner();
+
+    if id <= 0 {
+        return HttpResponse::NotFound().finish();
+    }
+
+    let lesson = find_lesson_by_id(&pool, id).await;
+
+    match lesson {
+        Ok(Some(lesson)) => HttpResponse::Ok().json(lesson),
+        Ok(None) => HttpResponse::NotFound().finish(),
+        Err(_) => HttpResponse::InternalServerError().finish(),
+    }
 }

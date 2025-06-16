@@ -2,17 +2,18 @@ use crate::api::category::all_categories;
 use crate::api::tag::all_tags;
 use crate::config::AppConfig;
 use crate::config::DatabaseSettings;
+use crate::ohara::get_lesson_by_id;
 use crate::ohara::{all_courses, get_course_by_slug};
 use actix_cors::Cors;
 use actix_web::dev::Server;
 use actix_web::middleware;
+use actix_web::middleware::Logger;
 use actix_web::web::Data;
 use actix_web::{App, HttpResponse, HttpServer, web};
 use anyhow::Result;
 use sqlx::PgPool;
 use sqlx::postgres::PgPoolOptions;
 use std::net::TcpListener;
-use actix_web::middleware::Logger;
 
 pub struct Api {
     server: Server,
@@ -63,14 +64,10 @@ fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, st
                 Cors::default()
                     .allow_any_origin()
                     .allow_any_method()
-                    .allow_any_header()
+                    .allow_any_header(),
             )
-            .wrap(
-                middleware::NormalizePath::trim()
-            )
-            .wrap(Logger::new(
-                "%a %t %T %P %b %{User-Agent}i",
-            ))
+            .wrap(middleware::NormalizePath::trim())
+            .wrap(Logger::new("%a %t %T %P %b %{User-Agent}i"))
             .service(
                 web::scope("/api/v1")
                     .route("/healthz", web::get().to(health_check))
@@ -79,7 +76,11 @@ fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, st
                     .service(
                         web::scope("/courses")
                             .route("", web::get().to(all_courses))
-                            .route("/{slug}", web::get().to(get_course_by_slug))
+                            .route("/{slug}", web::get().to(get_course_by_slug)),
+                    )
+                    .service(
+                        web::scope("/lessons")
+                        .route("/{id}", web::get().to(get_lesson_by_id)),
                     ),
             )
             .app_data(db_pool.clone())
