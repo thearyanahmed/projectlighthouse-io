@@ -8,6 +8,7 @@
         text: string;
         id: string;
         level: number;
+        is_child: boolean;
     }
 
     let headings: Heading[] = [];
@@ -34,7 +35,13 @@
                 .join("")
                 .trim();
             const id = slugify(text);
-            headings.push({ text, id, level: depth });
+
+            headings.push({
+                text,
+                id,
+                level: depth,
+                is_child: depth > 2, // h3+ treated as child
+            });
             return `<h${depth} id="${id}">${text}</h${depth}>`;
         },
     };
@@ -128,137 +135,23 @@
                         >
                             On this page
                         </h2>
+
                         <ul
-                            class="mt-3 flex flex-col gap-3 border-l border-gray-950/10 text-sm/6 text-gray-700 dark:border-white/10 dark:text-gray-400"
+                            class="border-l border-gray-950/10 mt-3 flex flex-col gap-3 text-sm/6 text-gray-500 dark:border-white/10 dark:text-gray-400"
                         >
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#the-illusion-of-navigation"
-                                    class="block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    aria-current="location"
-                                    >The Illusion of Navigation</a
+                            {#each headings as h}
+                                <li
+                                    class="-ml-px border-l border-transparent dark:hover:text-white dark:has-aria-[current=location]:border-white"
                                 >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#identifying-your-causal-factors"
-                                    class="block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >Identifying Your Causal Factors</a
-                                >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#internal-causal-factors"
-                                    class="pl-4 block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >Internal Causal Factors</a
-                                >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#external-causal-factors"
-                                    class="pl-4 block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >External Causal Factors</a
-                                >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#mapping-your-causal-terrain"
-                                    class="block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >Mapping Your Causal Terrain</a
-                                >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#1-track-your-automatic-responses"
-                                    class="pl-4 block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >1. Track Your Automatic Responses</a
-                                >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#2-identify-your-environmental-triggers"
-                                    class="pl-4 block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >2. Identify Your Environmental Triggers</a
-                                >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#3-recognize-your-decision-patterns"
-                                    class="pl-4 block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >3. Recognize Your Decision Patterns</a
-                                >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#4-notice-your-attention-allocation"
-                                    class="pl-4 block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >4. Notice Your Attention Allocation</a
-                                >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#case-study-the-career-transition"
-                                    class="block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >Case Study: The Career Transition</a
-                                >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#predicting-your-inevitable-path"
-                                    class="block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >Predicting Your Inevitable Path</a
-                                >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#working-with-your-causal-factors-not-against-them"
-                                    class="block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >Working With Your Causal Factors, Not
-                                    Against Them</a
-                                >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#the-strange-comfort-of-causal-clarity"
-                                    class="block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >The Strange Comfort of Causal Clarity</a
-                                >
-                            </li>
-                            <li
-                                class="-ml-px border-l border-transparent pl-4 hover:text-gray-950 hover:not-has-aria-[current=location]:border-gray-400 dark:hover:text-white has-aria-[current=location]:border-gray-950 dark:has-aria-[current=location]:border-white"
-                            >
-                                <a
-                                    href="#next-steps"
-                                    class="block aria-[current=location]:font-medium aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white"
-                                    >Next Steps</a
-                                >
-                            </li>
+                                    <a
+                                        href={`#${h.id}`}
+                                        class={`pl-4 block aria-[current=location]:font-regular aria-[current=location]:text-gray-950 dark:aria-[current=location]:text-white${h.is_child ? " pl-8" : ""}`}
+                                        aria-current="location"
+                                    >
+                                        {h.text}
+                                    </a>
+                                </li>
+                            {/each}
                         </ul>
                     </nav>
                 </div>
