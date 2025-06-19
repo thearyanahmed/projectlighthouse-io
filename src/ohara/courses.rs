@@ -15,7 +15,6 @@ pub struct Course {
     pub seo_keywords: Option<String>,
     pub seo_image: Option<String>,
 
-    pub published_at: Option<chrono::NaiveDateTime>,
     pub created_at: Option<chrono::NaiveDateTime>,
     pub updated_at: Option<chrono::NaiveDateTime>,
     pub deleted_at: Option<chrono::NaiveDateTime>,
@@ -35,7 +34,6 @@ pub async fn get_courses(pool: &PgPool) -> Result<Vec<Course>> {
             seo_description,
             seo_keywords,
             seo_image,
-            published_at,
             created_at,
             updated_at,
             deleted_at
@@ -63,7 +61,6 @@ pub async fn find_course_by_slug(pool: &PgPool, slug: &str) -> Result<Option<Cou
             seo_description,
             seo_keywords,
             seo_image,
-            published_at,
             created_at,
             updated_at,
             deleted_at

@@ -1,4 +1,3 @@
--- Add migration script here
 -- DELETE ALL EXISTING DATA FOR A FRESH START
 DELETE FROM lessons;
 DELETE FROM modules;
@@ -8,18 +7,17 @@ DELETE FROM courses;
 -- The lessons will then be linked to these new course IDs.
 
 -- Course: Introduction
-INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, published_at, created_at, updated_at)
+INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image,  created_at, updated_at)
 VALUES (
   'Introduction to Go Command Line Applications',
   'introduction-to-go-cli-applications',
   'Get started with the fundamental concepts and environment setup for building command line applications in Go.',
   NULL, NULL, NULL, NULL, NULL,
-  NOW(), NOW(), NOW()
+  NOW(), NOW()
 );
 
 -- Lessons for Introduction (original module_id = 1)
 -- Find the ID of the newly created 'introduction-to-go-cli-applications' course
--- and update the lessons that were previously linked to module_id 1
 INSERT INTO lessons (course_id, module_id, name, media_url, content, meta_name, meta_description, page_layout, watch_time)
 SELECT
     (SELECT id FROM courses WHERE slug = 'introduction-to-go-cli-applications'),
@@ -37,13 +35,13 @@ FROM (VALUES
 
 
 -- Course: Counting Words
-INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, published_at, created_at, updated_at)
+INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image,  created_at, updated_at)
 VALUES (
   'Building a Word Counter in Go',
   'building-a-word-counter-in-go',
   'Learn to process text and count words, exploring file reading, testing, and algorithm optimization in Go.',
   NULL, NULL, NULL, NULL, NULL,
-  NOW(), NOW(), NOW()
+   NOW(), NOW()
 );
 
 -- Lessons for Counting Words (original module_id = 2)
@@ -64,13 +62,13 @@ FROM (VALUES
 
 
 -- Course: Input, Output, & Arguments
-INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, published_at, created_at, updated_at)
+INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image,  created_at, updated_at)
 VALUES (
   'Handling Input, Output, and Arguments in Go CLI',
   'handling-io-and-arguments-go-cli',
   'Master how to interact with the command line using standard input/output, exit codes, and argument parsing in Go.',
   NULL, NULL, NULL, NULL, NULL,
-  NOW(), NOW(), NOW()
+  NOW(), NOW()
 );
 
 -- Lessons for Input, Output, & Arguments (original module_id = 3)
@@ -97,13 +95,13 @@ FROM (VALUES
 
 
 -- Course: Adding Features
-INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, published_at, created_at, updated_at)
+INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image,  created_at, updated_at)
 VALUES (
   'Adding Advanced Features to Go CLI Applications',
   'adding-advanced-features-go-cli',
   'Expand your CLI tools by implementing new features, using methods, and organizing your Go code effectively.',
   NULL, NULL, NULL, NULL, NULL,
-  NOW(), NOW(), NOW()
+   NOW(), NOW()
 );
 
 -- Lessons for Adding Features (original module_id = 4)
@@ -132,13 +130,13 @@ FROM (VALUES
 
 
 -- Course: Concurrency & Streams
-INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, published_at, created_at, updated_at)
+INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image,  created_at, updated_at)
 VALUES (
   'Concurrency and Streams in Go CLI',
   'concurrency-and-streams-go-cli',
   'Harness the power of Go routines, channels, and I/O streams to build highly concurrent and efficient CLI tools.',
   NULL, NULL, NULL, NULL, NULL,
-  NOW(), NOW(), NOW()
+  NOW(), NOW()
 );
 
 -- Lessons for Concurrency & Streams (original module_id = 5)
@@ -159,13 +157,13 @@ FROM (VALUES
 
 
 -- Course: Advanced Testing
-INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, published_at, created_at, updated_at)
+INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image,  created_at, updated_at)
 VALUES (
   'Advanced Testing Techniques for Go CLI',
   'advanced-testing-go-cli',
   'Explore comprehensive testing strategies, including benchmarks and end-to-end testing, for robust Go CLI applications.',
   NULL, NULL, NULL, NULL, NULL,
-  NOW(), NOW(), NOW()
+  NOW(), NOW()
 );
 
 -- Lessons for Advanced Testing (original module_id = 6)
@@ -187,13 +185,13 @@ FROM (VALUES
 
 
 -- Course: Commands, Signals, & Contexts
-INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, published_at, created_at, updated_at)
+INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, created_at, updated_at)
 VALUES (
   'Managing Commands, Signals, and Contexts in Go CLI',
   'managing-commands-signals-contexts-go-cli',
   'Learn to execute external commands, handle system signals, and utilize contexts for graceful shutdowns in Go CLI apps.',
   NULL, NULL, NULL, NULL, NULL,
-  NOW(), NOW(), NOW()
+ NOW(), NOW()
 );
 
 -- Lessons for Commands, Signals, & Contexts (original module_id = 7)
@@ -218,13 +216,13 @@ FROM (VALUES
 
 
 -- Course: Filesystem & Networking
-INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, published_at, created_at, updated_at)
+INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image,  created_at, updated_at)
 VALUES (
   'Filesystem and Networking for Go CLI Applications',
   'filesystem-and-networking-go-cli',
   'Dive into interacting with the filesystem, managing file permissions and locks, and building network-aware Go CLI tools.',
   NULL, NULL, NULL, NULL, NULL,
-  NOW(), NOW(), NOW()
+   NOW(), NOW()
 );
 
 -- Lessons for Filesystem & Networking (original module_id = 8)
@@ -255,33 +253,31 @@ FROM (VALUES
 -- did not have associated lessons in the provided data. We will create courses for them.
 
 -- Course: Powerful Command Line Applications
-INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, published_at, created_at, updated_at)
+INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image,  created_at, updated_at)
 VALUES (
   'Building Powerful Command Line Applications in Go',
   'building-powerful-cli-apps-go',
   'Explore advanced patterns and techniques to build highly powerful and robust command line applications with Go.',
   NULL, NULL, NULL, NULL, NULL,
-  NOW(), NOW(), NOW()
+ NOW(), NOW()
 );
 
 -- Course: Popular CLI Packages
-INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, published_at, created_at, updated_at)
+INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image,  created_at, updated_at)
 VALUES (
   'Popular Go CLI Packages and Libraries',
   'popular-go-cli-packages-libraries',
   'Discover and integrate essential third-party Go packages and libraries to accelerate your CLI development.',
   NULL, NULL, NULL, NULL, NULL,
-  NOW(), NOW(), NOW()
+   NOW(), NOW()
 );
 
 -- Course: Final Project
-INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image, published_at, created_at, updated_at)
+INSERT INTO courses (name, slug, description, thumbnail, seo_title, seo_description, seo_keywords, seo_image,  created_at, updated_at)
 VALUES (
   'Go Command Line Application Final Project',
   'go-cli-application-final-project',
   'Apply all the learned concepts by building a comprehensive final project, solidifying your Go CLI development skills.',
   NULL, NULL, NULL, NULL, NULL,
-  NOW(), NOW(), NOW()
+   NOW(), NOW()
 );
-
--- Note: The modules table is now empty as requested (deleted at the beginning and not re-populated).

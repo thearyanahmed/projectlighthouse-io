@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n        SELECT\n            id,\n            name,\n            slug,\n            description,\n            thumbnail,\n            seo_title,\n            seo_description,\n            seo_keywords,\n            seo_image,\n            published_at,\n            created_at,\n            updated_at,\n            deleted_at\n        FROM courses\n        LIMIT 10\n        ",
+  "query": "\n        SELECT\n            id,\n            name,\n            slug,\n            description,\n            thumbnail,\n            seo_title,\n            seo_description,\n            seo_keywords,\n            seo_image,\n            created_at,\n            updated_at,\n            deleted_at\n        FROM courses\n        WHERE slug = $1\n        ",
   "describe": {
     "columns": [
       {
@@ -50,27 +50,24 @@
       },
       {
         "ordinal": 9,
-        "name": "published_at",
-        "type_info": "Timestamp"
-      },
-      {
-        "ordinal": 10,
         "name": "created_at",
         "type_info": "Timestamp"
       },
       {
-        "ordinal": 11,
+        "ordinal": 10,
         "name": "updated_at",
         "type_info": "Timestamp"
       },
       {
-        "ordinal": 12,
+        "ordinal": 11,
         "name": "deleted_at",
         "type_info": "Timestamp"
       }
     ],
     "parameters": {
-      "Left": []
+      "Left": [
+        "Text"
+      ]
     },
     "nullable": [
       false,
@@ -84,9 +81,8 @@
       true,
       true,
       true,
-      true,
       true
     ]
   },
-  "hash": "8f211d9cdb38a5b2ce739a57b189e6e141ad9c19ab7c0cae5eb679965d44a699"
+  "hash": "99f8abdf0ae8f8dd0393f0d8a2cb8f868f29a4ce0ce0a7b910d5570bc2d23207"
 }

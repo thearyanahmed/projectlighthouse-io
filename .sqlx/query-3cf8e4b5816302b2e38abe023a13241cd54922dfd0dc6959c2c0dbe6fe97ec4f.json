@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n        SELECT\n            id,\n            course_id,\n            module_id,\n            name,\n            media_url,\n            content,\n            created_at,\n            updated_at,\n            deleted_at,\n            meta_name,\n            meta_description,\n            meta_keywords,\n            meta_image,\n            page_layout,\n            read_time,\n            watch_time\n        FROM lessons\n        WHERE course_id = $1\n        ",
+  "query": "\n        SELECT\n            id,\n            course_id,\n            name,\n            media_url,\n            content,\n            created_at,\n            updated_at,\n            deleted_at,\n            published_at,\n            meta_name,\n            meta_description,\n            meta_keywords,\n            meta_image,\n            page_layout,\n            read_time,\n            watch_time\n        FROM lessons\n        WHERE course_id = $1\n        ",
   "describe": {
     "columns": [
       {
@@ -15,37 +15,37 @@
       },
       {
         "ordinal": 2,
-        "name": "module_id",
-        "type_info": "Int4"
-      },
-      {
-        "ordinal": 3,
         "name": "name",
         "type_info": "Varchar"
       },
       {
-        "ordinal": 4,
+        "ordinal": 3,
         "name": "media_url",
         "type_info": "Varchar"
       },
       {
-        "ordinal": 5,
+        "ordinal": 4,
         "name": "content",
         "type_info": "Text"
       },
       {
-        "ordinal": 6,
+        "ordinal": 5,
         "name": "created_at",
         "type_info": "Timestamp"
       },
       {
-        "ordinal": 7,
+        "ordinal": 6,
         "name": "updated_at",
         "type_info": "Timestamp"
       },
       {
-        "ordinal": 8,
+        "ordinal": 7,
         "name": "deleted_at",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 8,
+        "name": "published_at",
         "type_info": "Timestamp"
       },
       {
@@ -93,10 +93,10 @@
       false,
       false,
       false,
-      false,
       true,
       true,
       false,
+      true,
       true,
       true,
       true,
@@ -108,5 +108,5 @@
       true
     ]
   },
-  "hash": "37ff3ce44cbd5f1a401147511436a182fee40f919e1de3a31c1ef139f1775472"
+  "hash": "3cf8e4b5816302b2e38abe023a13241cd54922dfd0dc6959c2c0dbe6fe97ec4f"
 }

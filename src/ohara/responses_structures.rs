@@ -14,7 +14,6 @@ pub struct ViewCourseResponse {
     pub seo_keywords: Option<String>,
     pub seo_image: Option<String>,
 
-    pub published_at: Option<chrono::NaiveDateTime>,
     pub created_at: Option<chrono::NaiveDateTime>,
     pub updated_at: Option<chrono::NaiveDateTime>,
 
@@ -25,7 +24,6 @@ pub struct ViewCourseResponse {
 pub struct ViewLessonResponse {
     pub id: i32,
     pub course_id: i32,
-    pub module_id: i32,
     pub name: String,
     pub media_url: Option<String>,
     pub content: Option<String>,
@@ -33,6 +31,7 @@ pub struct ViewLessonResponse {
     pub created_at: Option<chrono::NaiveDateTime>,
     pub updated_at: Option<chrono::NaiveDateTime>,
     pub deleted_at: Option<chrono::NaiveDateTime>,
+    pub published_at: Option<chrono::NaiveDateTime>,
 
     pub meta_name: Option<String>,
     pub meta_description: Option<String>,
@@ -50,7 +49,6 @@ impl ViewLessonResponse {
         Self {
             id: lesson.id,
             course_id: lesson.course_id,
-            module_id: lesson.module_id,
             name: lesson.name,
             media_url: lesson.media_url,
             content: lesson.content,
@@ -68,6 +66,7 @@ impl ViewLessonResponse {
 
             read_time: lesson.read_time,
             watch_time: lesson.watch_time,
+            published_at: lesson.published_at,
         }
     }
 }
@@ -91,7 +90,6 @@ impl ViewCourseResponse {
             seo_keywords: course.seo_keywords,
             seo_image: course.seo_image,
 
-            published_at: course.published_at,
             created_at: course.created_at,
             updated_at: course.updated_at,
             lessons: lessons_responses,

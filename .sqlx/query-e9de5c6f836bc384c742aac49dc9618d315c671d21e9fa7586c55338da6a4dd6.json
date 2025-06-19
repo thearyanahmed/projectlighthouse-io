@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "\n        SELECT id, course_id, module_id, name, media_url, content, created_at, updated_at, deleted_at,\n               meta_name, meta_description, meta_keywords, meta_image, page_layout, read_time, watch_time\n        FROM lessons\n        WHERE id = $1\n        ",
+  "query": "\n        SELECT id, course_id, name, media_url, content, created_at, updated_at, deleted_at, published_at,\n               meta_name, meta_description, meta_keywords, meta_image, page_layout, read_time, watch_time\n        FROM lessons\n        WHERE id = $1\n        ",
   "describe": {
     "columns": [
       {
@@ -15,37 +15,37 @@
       },
       {
         "ordinal": 2,
-        "name": "module_id",
-        "type_info": "Int4"
-      },
-      {
-        "ordinal": 3,
         "name": "name",
         "type_info": "Varchar"
       },
       {
-        "ordinal": 4,
+        "ordinal": 3,
         "name": "media_url",
         "type_info": "Varchar"
       },
       {
-        "ordinal": 5,
+        "ordinal": 4,
         "name": "content",
         "type_info": "Text"
       },
       {
-        "ordinal": 6,
+        "ordinal": 5,
         "name": "created_at",
         "type_info": "Timestamp"
       },
       {
-        "ordinal": 7,
+        "ordinal": 6,
         "name": "updated_at",
         "type_info": "Timestamp"
       },
       {
-        "ordinal": 8,
+        "ordinal": 7,
         "name": "deleted_at",
+        "type_info": "Timestamp"
+      },
+      {
+        "ordinal": 8,
+        "name": "published_at",
         "type_info": "Timestamp"
       },
       {
@@ -93,10 +93,10 @@
       false,
       false,
       false,
-      false,
       true,
       true,
       false,
+      true,
       true,
       true,
       true,
@@ -108,5 +108,5 @@
       true
     ]
   },
-  "hash": "b6261f012ee57730897d98d5bd3bb4d45bd3475ca12df35ac98706fe4ee9f2be"
+  "hash": "e9de5c6f836bc384c742aac49dc9618d315c671d21e9fa7586c55338da6a4dd6"
 }

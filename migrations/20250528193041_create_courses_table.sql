@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS courses (
     seo_keywords VARCHAR(255) NULL,
     seo_image VARCHAR(255) NULL,
 
-    published_at TIMESTAMP NULL,
     created_at TIMESTAMP NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_at TIMESTAMP NULL
@@ -44,5 +43,6 @@ CREATE TABLE IF NOT EXISTS lessons (
     page_layout SMALLINT NOT NULL DEFAULT 1, -- enum to define layout type, e.g., 0 for default, 1 for video, etc.
 
     read_time VARCHAR(10) NULL,
-    watch_time VARCHAR(10) NULL
+    watch_time VARCHAR(10) NULL,
+    published_at TIMESTAMP NULL
 );
