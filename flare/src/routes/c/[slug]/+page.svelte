@@ -10,15 +10,9 @@
 
     const course = data.course;
 
-    let course_metadata: CourseMetadataCount = {
-        lessons: 0,
-        modules: 0,
-        total_duration: "",
-    };
-
-    if (course) {
-        course_metadata = course_metadata_count(course);
-    }
+    let course_metadata: CourseMetadataCount | null = course
+        ? course_metadata_count(course)
+        : null;
 </script>
 
 <div>
@@ -53,17 +47,6 @@
                             <div
                                 class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3 text-sm/7 font-semibold text-gray-950 sm:gap-3 dark:text-white"
                             >
-                                <div class="flex items-center gap-1.5">
-                                    <svg
-                                        viewBox="0 0 16 16"
-                                        fill="none"
-                                        class="stroke-gray-950/40 dark:stroke-white/40 h-4 shrink-0"
-                                        ><path
-                                            d="M13.5 12.5V.5H4.5M13.5 12.5l-.26.39c-.45.67-.45 1.48 0 2.15l.26.46H4c-.83 0-1.5-.67-1.5-1.5v0M13.5 12.5H4.5M2.5 14V2.5C2.5 1.4 3.4.5 4.5.5v0M2.5 14c0-.83.67-1.5 1.5-1.5h.5M4.5.5v12"
-                                            stroke-linejoin="round"
-                                        ></path></svg
-                                    >{course_metadata.modules} modules
-                                </div>
                                 <span
                                     class="hidden text-gray-950/25 sm:inline dark:text-white/25"
                                     >·</span
@@ -76,7 +59,7 @@
                                         ><path
                                             d="M10.5 4.5H6.5c-.55 0-1 .45-1 1v6m4-7h3c.55 0 1 .45 1 1v9c0 .55-.45 1-1 1H6.5c-.55 0-1-.45-1-1v-3m4-7V1.5c0-.55-.45-1-1-1h-7c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h3"
                                         ></path></svg
-                                    >{course_metadata.lessons} lessons
+                                    >{course.lessons.length} lessons
                                 </div>
                                 <span
                                     class="hidden text-gray-950/25 sm:inline dark:text-white/25"
@@ -90,7 +73,7 @@
                                         ><circle cx="8" cy="8" r="7.5"
                                         ></circle><path d="M8 4V8H12"
                                         ></path></svg
-                                    >{course_metadata.total_duration}
+                                    >{course_metadata?.total_duration}
                                 </div>
                             </div>
                             <div class="mt-10">
@@ -109,21 +92,20 @@
                             </div>
                         </div>
                         <div class="grid grid-cols-1 gap-y-16 pb-10 sm:px-4">
-                            {#if course.modules.length === 0}
+                            {#if course.lessons.length === 0}
                                 <div class="col-span-full">
                                     <p class="text-gray-500 dark:text-gray-400">
-                                        This course has no modules yet.
+                                        This course has no lessons yet.
                                     </p>
                                 </div>
                             {/if}
 
-                            {#each course.modules as module (module.id)}
-                                <section
-                                    id="orientation"
-                                    class="grid grid-cols-4 border-t border-gray-950/10 dark:border-white/10"
-                                >
-                                    <div class="col-span-full sm:col-span-1">
-                                        <!-- <div
+                            <section
+                                id="orientation"
+                                class="grid grid-cols-4 border-t border-gray-950/10 dark:border-white/10"
+                            >
+                                <div class="col-span-full sm:col-span-1">
+                                    <!-- <div
                                             class="-mt-px inline-flex border-t border-gray-950 pt-px dark:border-white"
                                         >
                                             <div
@@ -132,97 +114,79 @@
                                                 Module {module.position}
                                             </div>
                                         </div> -->
-                                    </div>
-                                    <div
-                                        class="col-span-full pt-6 sm:col-span-3 sm:pt-10"
-                                    >
-                                        <div class="max-w-2xl">
-                                            <!-- <h2
-                                                class="text-2xl/7 font-medium tracking-tight text-pretty text-gray-950 dark:text-white"
-                                            >
-                                                {module.name}
-                                            </h2> -->
-
-                                            {#if module.lessons.length === 0}
-                                                <div class="col-span-full">
-                                                    <p
-                                                        class="text-gray-500 dark:text-gray-400"
-                                                    >
-                                                        This module has no
-                                                        lessons yet.
-                                                    </p>
-                                                </div>
-                                            {/if}
-
-                                            <ol class="mt-6 space-y-4">
-                                                {#each module.lessons as lesson (lesson.id)}
-                                                    <li>
-                                                        <div class="flow-root">
-                                                            <a
-                                                                class="-mx-3 -my-2 flex gap-3 rounded-xl px-3 py-2 text-sm/7 hover:bg-gray-950/4 dark:hover:bg-white/5"
-                                                                href={`/c/${course.slug}/learn/${lesson.id}/#${lesson.name
-                                                                    .replace(
-                                                                        /\s+/g,
-                                                                        "-",
-                                                                    )
-                                                                    .toLowerCase()}`}
-                                                                ><div
-                                                                    class="flex h-lh shrink items-center"
-                                                                >
-                                                                    <svg
-                                                                        viewBox="0 0 16 16"
+                                </div>
+                                <div
+                                    class="col-span-full pt-6 sm:col-span-3 sm:pt-10"
+                                >
+                                    <div class="max-w-2xl">
+                                        <ol class="mt-6 space-y-4">
+                                            {#each course.lessons as lesson (lesson.id)}
+                                                <li>
+                                                    <div class="flow-root">
+                                                        <a
+                                                            class="-mx-3 -my-2 flex gap-3 rounded-xl px-3 py-2 text-sm/7 hover:bg-gray-950/4 dark:hover:bg-white/5"
+                                                            href={`/c/${course.slug}/learn/${lesson.id}/#${lesson.name
+                                                                .replace(
+                                                                    /\s+/g,
+                                                                    "-",
+                                                                )
+                                                                .toLowerCase()}`}
+                                                            ><div
+                                                                class="flex h-lh shrink items-center"
+                                                            >
+                                                                <svg
+                                                                    viewBox="0 0 16 16"
+                                                                    fill="none"
+                                                                    class="fill-gray-950 stroke-gray-950/40 dark:fill-white dark:stroke-white/40 h-4 shrink-0"
+                                                                    ><circle
                                                                         fill="none"
-                                                                        class="fill-gray-950 stroke-gray-950/40 dark:fill-white dark:stroke-white/40 h-4 shrink-0"
-                                                                        ><circle
-                                                                            fill="none"
-                                                                            cx="8"
-                                                                            cy="8"
-                                                                            r="7.5"
+                                                                        cx="8"
+                                                                        cy="8"
+                                                                        r="7.5"
 
-                                                                        ></circle><path
-                                                                            stroke="none"
-                                                                            d="M10.25 7.56699C10.5833 7.75944 10.5833 8.24056 10.25 8.43301L7.25 10.1651C6.91667 10.3575 6.5 10.117 6.5 9.73205L6.5 6.26795C6.5 5.88305 6.91667 5.64249 7.25 5.83494L10.25 7.56699Z"
+                                                                    ></circle><path
+                                                                        stroke="none"
+                                                                        d="M10.25 7.56699C10.5833 7.75944 10.5833 8.24056 10.25 8.43301L7.25 10.1651C6.91667 10.3575 6.5 10.117 6.5 9.73205L6.5 6.26795C6.5 5.88305 6.91667 5.64249 7.25 5.83494L10.25 7.56699Z"
 
-                                                                        ></path></svg
+                                                                    ></path></svg
+                                                                >
+                                                            </div>
+                                                            <div>
+                                                                <div>
+                                                                    <span
+                                                                        class="font-semibold text-gray-950 dark:text-white"
+                                                                        >{lesson.name}</span
+                                                                    ><span
+                                                                        class="mx-2 hidden text-gray-950/25 sm:inline dark:text-white/25"
+                                                                        >·</span
+                                                                    ><span
+                                                                        class="hidden text-gray-500 sm:inline"
+                                                                        >{lesson_duration(
+                                                                            lesson,
+                                                                        )}</span
                                                                     >
                                                                 </div>
-                                                                <div>
-                                                                    <div>
-                                                                        <span
-                                                                            class="font-semibold text-gray-950 dark:text-white"
-                                                                            >{lesson.name}</span
-                                                                        ><span
-                                                                            class="mx-2 hidden text-gray-950/25 sm:inline dark:text-white/25"
-                                                                            >·</span
-                                                                        ><span
-                                                                            class="hidden text-gray-500 sm:inline"
-                                                                            >{lesson_duration(
-                                                                                lesson,
-                                                                            )}</span
-                                                                        >
-                                                                    </div>
-                                                                    <p
-                                                                        class="text-gray-700 dark:text-gray-400"
-                                                                    >
-                                                                        {lesson.meta_description}
-                                                                    </p>
-                                                                    <div
-                                                                        class="text-gray-500 sm:hidden"
-                                                                    >
-                                                                        {lesson_duration(
-                                                                            lesson,
-                                                                        )}
-                                                                    </div>
-                                                                </div></a
-                                                            >
-                                                        </div>
-                                                    </li>
-                                                {/each}
-                                            </ol>
-                                        </div>
+                                                                <p
+                                                                    class="text-gray-700 dark:text-gray-400"
+                                                                >
+                                                                    {lesson.meta_description}
+                                                                </p>
+                                                                <div
+                                                                    class="text-gray-500 sm:hidden"
+                                                                >
+                                                                    {lesson_duration(
+                                                                        lesson,
+                                                                    )}
+                                                                </div>
+                                                            </div></a
+                                                        >
+                                                    </div>
+                                                </li>
+                                            {/each}
+                                        </ol>
                                     </div>
-                                </section>
-                            {/each}
+                                </div>
+                            </section>
                         </div>
                     </div>
                 </div>

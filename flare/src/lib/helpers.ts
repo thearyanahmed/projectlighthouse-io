@@ -1,26 +1,19 @@
 import type { ViewCourseResponse, ViewLessonResponse } from "./api_response_types";
 
 export type CourseMetadataCount = {
-    lessons: number;
-    modules: number;
     total_duration: string;
 }
 
 export function course_metadata_count(course: ViewCourseResponse): CourseMetadataCount {
-    const lessons = course.modules.reduce((acc, module) => acc + module.lessons.length, 0);
-    const modules = course.modules.length;
-
     // Calculate total duration in a human-readable format
-    const totalDuration = course.modules.reduce((acc, module) => {
-        return acc + module.lessons.reduce((lessonAcc, lesson) => {
+    const totalDuration = course.lessons.reduce((acc,) => {
+        return acc + course.lessons.reduce((lessonAcc, lesson) => {
             const duration = parse_duration(lesson.watch_time || "0:00");
             return lessonAcc + duration;
         }, 0);
     }, 0);
 
     return {
-        lessons,
-        modules,
         total_duration: format_duration(totalDuration)
     };
 }

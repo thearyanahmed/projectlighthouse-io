@@ -7,6 +7,7 @@ type ApiResult<T> = { data: T; error: null } | { data: null; error: Error };
 export async function get<T>(path: string, fetch: Fetch): Promise<ApiResult<T>> {
     const fullpath = `${BASE_URL}/${path}`;
 
+    console.debug(`GET ${fullpath}`);
     try {
         const res = await fetch(fullpath);
 
