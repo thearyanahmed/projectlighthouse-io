@@ -62,7 +62,7 @@
                                             d="M13.5 12.5V.5H4.5M13.5 12.5l-.26.39c-.45.67-.45 1.48 0 2.15l.26.46H4c-.83 0-1.5-.67-1.5-1.5v0M13.5 12.5H4.5M2.5 14V2.5C2.5 1.4 3.4.5 4.5.5v0M2.5 14c0-.83.67-1.5 1.5-1.5h.5M4.5.5v12"
                                             stroke-linejoin="round"
                                         ></path></svg
-                                    >{course_metadata.modules}  modules
+                                    >{course_metadata.modules} modules
                                 </div>
                                 <span
                                     class="hidden text-gray-950/25 sm:inline dark:text-white/25"
@@ -123,7 +123,7 @@
                                     class="grid grid-cols-4 border-t border-gray-950/10 dark:border-white/10"
                                 >
                                     <div class="col-span-full sm:col-span-1">
-                                        <div
+                                        <!-- <div
                                             class="-mt-px inline-flex border-t border-gray-950 pt-px dark:border-white"
                                         >
                                             <div
@@ -131,17 +131,17 @@
                                             >
                                                 Module {module.position}
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div
                                         class="col-span-full pt-6 sm:col-span-3 sm:pt-10"
                                     >
                                         <div class="max-w-2xl">
-                                            <h2
+                                            <!-- <h2
                                                 class="text-2xl/7 font-medium tracking-tight text-pretty text-gray-950 dark:text-white"
                                             >
                                                 {module.name}
-                                            </h2>
+                                            </h2> -->
 
                                             {#if module.lessons.length === 0}
                                                 <div class="col-span-full">
@@ -161,7 +161,10 @@
                                                             <a
                                                                 class="-mx-3 -my-2 flex gap-3 rounded-xl px-3 py-2 text-sm/7 hover:bg-gray-950/4 dark:hover:bg-white/5"
                                                                 href={`/c/${course.slug}/learn/${lesson.id}/#${lesson.name
-                                                                    .replace(/\s+/g, "-")
+                                                                    .replace(
+                                                                        /\s+/g,
+                                                                        "-",
+                                                                    )
                                                                     .toLowerCase()}`}
                                                                 ><div
                                                                     class="flex h-lh shrink items-center"

@@ -14,16 +14,8 @@ export type ViewCourseResponse = {
     created_at: string | null;   // ISO date string
     updated_at: string | null;   // ISO date string
 
-    modules: ViewModuleResponse[];
-};
-
-export type ViewModuleResponse = {
-    id: number;
-    course_id: number;
-    name: string;
-    position: number;
-
     lessons: ViewLessonResponse[];
+
 };
 
 export type ViewLessonResponse = {

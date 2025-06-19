@@ -18,16 +18,6 @@ pub struct ViewCourseResponse {
     pub created_at: Option<chrono::NaiveDateTime>,
     pub updated_at: Option<chrono::NaiveDateTime>,
 
-    pub modules: Vec<ViewModuleResponse>,
-}
-
-#[derive(Serialize, Debug, Clone)]
-pub struct ViewModuleResponse {
-    pub id: i32,
-    pub course_id: i32,
-    pub name: String,
-    pub position: i16,
-
     pub lessons: Vec<ViewLessonResponse>,
 }
 
@@ -82,44 +72,12 @@ impl ViewLessonResponse {
     }
 }
 
-impl ViewModuleResponse {
-    pub fn from_module(module: crate::ohara::Module, lessons: Vec<crate::ohara::Lesson>) -> Self {
-        Self {
-            id: module.id,
-            course_id: module.course_id,
-            name: module.name,
-            position: module.position,
-
-            lessons: lessons
-                .into_iter()
-                .map(ViewLessonResponse::from_lesson)
-                .collect(),
-        }
-    }
-}
-
 impl ViewCourseResponse {
-    pub fn from_course(
-        course: crate::ohara::Course,
-        modules: Vec<crate::ohara::Module>,
-        lessons: Vec<crate::ohara::Lesson>,
-    ) -> Self {
-        let module_map: std::collections::HashMap<i32, Vec<crate::ohara::Lesson>> = lessons
+    pub fn from_course(course: crate::ohara::Course, lessons: Vec<crate::ohara::Lesson>) -> Self {
+        let lessons_responses = lessons
             .into_iter()
-            .filter(|lesson| lesson.course_id == course.id)
-            .fold(std::collections::HashMap::new(), |mut acc, lesson| {
-                acc.entry(lesson.module_id).or_default().push(lesson);
-                acc
-            });
-
-        let modules_responses = modules
-            .into_iter()
-            .filter(|module| module.course_id == course.id)
-            .map(|module| {
-                let lessons = module_map.get(&module.id).cloned().unwrap_or_default();
-                ViewModuleResponse::from_module(module, lessons)
-            })
-            .collect();
+            .map(ViewLessonResponse::from_lesson)
+            .collect::<Vec<_>>();
 
         Self {
             id: course.id,
@@ -136,8 +94,7 @@ impl ViewCourseResponse {
             published_at: course.published_at,
             created_at: course.created_at,
             updated_at: course.updated_at,
-
-            modules: modules_responses,
+            lessons: lessons_responses,
         }
     }
 }

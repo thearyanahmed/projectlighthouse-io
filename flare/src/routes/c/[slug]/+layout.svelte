@@ -12,11 +12,11 @@
 		{#if data.course?.modules && data.course.modules.length > 0}
 			{#each data.course.modules as module, index (index)}
 				<div>
-					<h2
+					<!-- <h2
 						class="text-base/7 font-semibold text-pretty text-gray-950 sm:text-sm/6 dark:text-white"
 					>
 						{module.name}
-					</h2>
+					</h2> -->
 					{#if module.lessons && module.lessons.length > 0}
 						<ul
 							class="mt-4 flex flex-col gap-4 border-l border-gray-950/10 text-base/7 text-gray-700 sm:mt-3 sm:gap-3 sm:text-sm/6 dark:border-white/10 dark:text-gray-400"
