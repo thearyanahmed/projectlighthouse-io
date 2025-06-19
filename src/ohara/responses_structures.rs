@@ -1,3 +1,4 @@
+use chrono::Utc;
 use serde::Serialize;
 use sqlx::types::chrono;
 
@@ -46,19 +47,33 @@ pub struct ViewLessonResponse {
 
 impl ViewLessonResponse {
     pub fn from_lesson(lesson: crate::ohara::Lesson) -> Self {
+        let (content, media_url, meta_description) = match lesson.published_at {
+            Some(published_at) if published_at < Utc::now().naive_utc() => (
+                Some("Coming soon".to_string()),
+                Some("#".to_string()),
+                lesson.meta_description,
+            ),
+            None => (
+                Some("Coming soon".to_string()),
+                Some("#".to_string()),
+                Some("Coming soon".to_string()),
+            ),
+            _ => (lesson.content, lesson.media_url, lesson.meta_description),
+        };
+
         Self {
             id: lesson.id,
             course_id: lesson.course_id,
             name: lesson.name,
-            media_url: lesson.media_url,
-            content: lesson.content,
+            media_url: media_url,
+            content: content,
 
             created_at: Some(lesson.created_at),
             updated_at: lesson.updated_at,
             deleted_at: lesson.deleted_at,
 
             meta_name: lesson.meta_name,
-            meta_description: lesson.meta_description,
+            meta_description: meta_description,
             meta_keywords: lesson.meta_keywords,
             meta_image: lesson.meta_image,
 
