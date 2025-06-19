@@ -9,7 +9,7 @@
 	<div class="group">
 		<div class="xl:not-group-data-sidebar-collapsed:ml-(--container-2xs)">
 			<div
-				class="sticky top-0 z-10 bg-white/90 backdrop-blur-sm dark:bg-gray-950/90 flex items-center justify-between gap-x-8 px-4 py-4 sm:px-6"
+				class="sticky top-0 z-10 backdrop-blur-sm flex items-center justify-between gap-x-8 px-4 py-4 sm:px-6"
 			>
 				<div class="flex min-w-0 shrink items-center gap-x-4">
 					<button

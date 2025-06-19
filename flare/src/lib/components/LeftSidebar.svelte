@@ -12,7 +12,7 @@
         on:click={toggleSidebar}
         type="button"
         aria-label="Toggle sidebar"
-        class="relative cursor-pointer z-50 *:relative before:absolute before:top-1/2 before:left-1/2 before:size-8 before:-translate-1/2 before:rounded-md before:bg-white/75 before:backdrop-blur-sm dark:before:bg-gray-950/75 data-hover:before:bg-gray-950/5 dark:data-hover:before:bg-white/5 focus:outline-hidden data-focus:before:outline-2 data-focus:before:outline-blue-700 data-focus:before:outline-solid"
+        class="relative cursor-pointer z-50 *:relative before:absolute before:top-1/2 before:left-1/2 before:size-8 before:-translate-1/2 before:rounded-md before:backdrop-blur-sm dark:before:bg-gray-950/75 data-hover:before:bg-gray-950/5 focus:outline-hidden data-focus:before:outline-2 data-focus:before:outline-blue-700 data-focus:before:outline-solid"
     >
         <svg
             viewBox="0 0 16 14"
@@ -28,13 +28,13 @@
 
 <!-- Sidebar container (content hides when closed) -->
 <aside
-    class="sidebar fixed inset-y-0 left-0 w-2xs overflow-y-auto border-r border-gray-950/10 group-data-sidebar-collapsed:hidden max-xl:hidden dark:border-white/10"
+    class="sidebar fixed inset-y-0 left-0 w-2xs z-40 overflow-y-auto border-r border-gray-950/10 group-data-sidebar-collapsed:hidden dark:border-white/10"
     class:closed={!isOpen}
 >
     <nav aria-label="Course" class="px-6 py-4">
         {#if isOpen}
             <div class="mt-10">
-                <div class="space-y-8">
+                <div class="space-y-8 bg-white">
                     <slot />
                 </div>
             </div>

@@ -40,3 +40,25 @@ export type ViewLessonResponse = {
     read_time: string | null;
     watch_time: string | null;
 };
+
+export type ViewAllCoursesResponse = {
+    courses: ViewSingleCourseResponse[];
+    error: string | null;
+}
+
+export type ViewSingleCourseResponse = {
+    id: number;
+    name: string;
+    slug: string;
+    description: string;
+    thumbnail: string | null;
+
+    seo_title: string | null;
+    seo_description: string | null;
+    seo_keywords: string | null;
+    seo_image: string | null;
+
+    created_at: string | null;
+    updated_at: string | null;
+    deleted_at: string | null;
+}

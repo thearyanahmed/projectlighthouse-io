@@ -2,7 +2,7 @@
 @import "./typography.css";
 
 @theme inline {
-    --font-sans: var(--font-inter);
+    --font-sans: "Gelasio", serif;
     --font-sans--font-feature-settings: "cv11";
     --font-mono: var(--font-geist-mono);
 }

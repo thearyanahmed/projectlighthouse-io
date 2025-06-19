@@ -1,4 +1,4 @@
-import type { ViewCourseResponse, ViewLessonResponse } from "./api_response_types";
+import type { ViewCourseResponse, ViewLessonResponse, ViewSingleCourseResponse } from "./api_response_types";
 import type { Healthz } from "./types";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -57,4 +57,8 @@ type Fetch = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>
 
 export async function retrieve_lesson_by_id(id: number, fetch: Fetch): Promise<ApiResult<ViewLessonResponse>> {
     return get<ViewLessonResponse>('lessons/' + id, fetch);
+}
+
+export async function retrieve_all_courses(fetch: Fetch): Promise<ApiResult<ViewSingleCourseResponse[]>> {
+    return get<ViewSingleCourseResponse[]>('courses/', fetch);
 }

@@ -84,7 +84,9 @@
 
                         <div id="lesson-content">
                             {#if renderedContent}
-                                {@html renderedContent}
+                                <div class="text-lg">
+                                    {@html renderedContent}
+                                </div>
                             {:else if data.lesson?.content === null}
                                 <p>No content provided for this lesson.</p>
                             {:else}
@@ -92,7 +94,7 @@
                             {/if}
                         </div>
                     </div>
-                    <div
+                    <!-- <div
                         class="mt-16 border-t border-gray-200 pt-8 dark:border-white/10"
                     >
                         <div class="flow-root">
@@ -126,7 +128,7 @@
                                 </p></a
                             >
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="hidden w-66 lg:block">
                     <nav class="sticky top-16">
