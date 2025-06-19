@@ -1,9 +1,7 @@
 <script lang="ts">
     import { marked, type Tokens } from "marked";
     import type { PageProps } from "./$types";
-
     const { data }: PageProps = $props();
-
     interface Heading {
         text: string;
         id: string;
@@ -11,9 +9,17 @@
         is_child: boolean;
     }
 
+    // svelte-ignore non_reactive_update
     let headings: Heading[] = [];
     let slugCounts = new Map<string, number>();
-
+    function escapeHtml(html: string): string {
+        return html
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
     function slugify(text: string): string {
         let slug = text
             .toLowerCase()
@@ -44,6 +50,10 @@
             });
             return `<h${depth} id="${id}">${text}</h${depth}>`;
         },
+        code({ lang, text }: Tokens.Code): string {
+            const langClass = lang ? `language-${lang}` : "";
+            return `<pre><code class="${langClass}">${escapeHtml(text)}</code></pre>`;
+        },
     };
 
     marked.use({ renderer });
@@ -62,12 +72,13 @@
             <div
                 class="group aspect-video w-full rounded-2xl bg-gray-950 dark:bg-gray-900"
             >
+                <!-- svelte-ignore a11y_media_has_caption -->
                 <video
                     id="video"
                     src="https://assets.tailwindcss.com/templates/compass/landscape-of-choice.mp4"
                     poster="https://assets.tailwindcss.com/templates/compass/lesson-video-thumbnail-01.png"
                     preload="metadata"
-                    controls=""
+                    controls="false"
                     class="aspect-video w-full rounded-2xl sm:group-data-offscreen:data-playing:fixed sm:group-data-offscreen:data-playing:right-4 sm:group-data-offscreen:data-playing:bottom-4 sm:group-data-offscreen:data-playing:z-10 sm:group-data-offscreen:data-playing:max-w-md sm:group-data-offscreen:data-playing:rounded-xl sm:group-data-offscreen:data-playing:shadow-lg"
                 ></video>
             </div>
@@ -84,7 +95,7 @@
 
                         <div id="lesson-content">
                             {#if renderedContent}
-                                <div class="text-lg">
+                                <div class="text-lg markdown-body">
                                     {@html renderedContent}
                                 </div>
                             {:else if data.lesson?.content === null}

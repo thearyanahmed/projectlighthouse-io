@@ -7,9 +7,11 @@
     "npm:@tailwindcss/forms@~0.5.9": "0.5.10_tailwindcss@4.1.6",
     "npm:@tailwindcss/typography@~0.5.15": "0.5.16_tailwindcss@4.1.6",
     "npm:@tailwindcss/vite@4": "4.1.6_vite@6.3.5__picomatch@4.0.2",
+    "npm:@types/prismjs@^1.26.5": "1.26.5",
     "npm:dompurify@^3.2.6": "3.2.6",
     "npm:marked@^15.0.12": "15.0.12",
     "npm:mdsvex@~0.12.3": "0.12.6_svelte@5.28.6__acorn@8.14.1",
+    "npm:prismjs@^1.30.0": "1.30.0",
     "npm:svelte-check@4": "4.1.7_svelte@5.28.6__acorn@8.14.1_typescript@5.8.3",
     "npm:svelte@5": "5.28.6_acorn@8.14.1",
     "npm:tailwindcss@4": "4.1.6",
@@ -565,6 +567,9 @@
         "@types/unist"
       ]
     },
+    "@types/prismjs@1.26.5": {
+      "integrity": "sha512-AUZTa7hQ2KY5L7AmtSiqxlhWxb4ina0yd8hNbl4TWuqnv/pFP0nDMb3YrfSBf4hJVGLh2YEIBfKaBW/9UEl6IQ=="
+    },
     "@types/resolve@1.20.2": {
       "integrity": "sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q=="
     },
@@ -1099,9 +1104,11 @@
         "npm:@tailwindcss/forms@~0.5.9",
         "npm:@tailwindcss/typography@~0.5.15",
         "npm:@tailwindcss/vite@4",
+        "npm:@types/prismjs@^1.26.5",
         "npm:dompurify@^3.2.6",
         "npm:marked@^15.0.12",
         "npm:mdsvex@~0.12.3",
+        "npm:prismjs@^1.30.0",
         "npm:svelte-check@4",
         "npm:svelte@5",
         "npm:tailwindcss@4",
