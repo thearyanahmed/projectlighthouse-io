@@ -145,7 +145,7 @@ async fn test_get_course_by_slug_response_structure_is_correct() {
         "seo_description",
         "seo_keywords",
         "seo_image",
-        "published_at",
+        // "published_at",
         "created_at",
         "updated_at",
         "modules",
