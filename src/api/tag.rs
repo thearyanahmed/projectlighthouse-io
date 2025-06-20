@@ -1,6 +1,6 @@
-use actix_web::HttpResponse;
-use crate::storer::Tag;
 use crate::storer::StaticLookup;
+use crate::storer::Tag;
+use actix_web::HttpResponse;
 
 pub async fn all_tags() -> HttpResponse {
     let tags = Tag::all();

@@ -18,7 +18,6 @@ use std::net::TcpListener;
 pub struct Api {
     server: Server,
     address: String,
-    port: u16,
 }
 
 impl Api {
@@ -28,22 +27,14 @@ impl Api {
         let connection_pool = get_connection_pool(&cfg.database);
 
         let listener = TcpListener::bind(&address)?;
-        let port = listener.local_addr().unwrap().port();
+        // let port = listener.local_addr().unwrap().port();
         let server = listen_and_serve(listener, connection_pool)?;
 
-        Ok(Api {
-            server,
-            address,
-            port,
-        })
+        Ok(Api { server, address })
     }
 
     pub fn address(&self) -> &str {
         &self.address
-    }
-
-    pub fn port(&self) -> u16 {
-        self.port
     }
 
     pub async fn run_until_stopped(self) -> Result<(), std::io::Error> {
@@ -79,8 +70,7 @@ fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, st
                             .route("/{slug}", web::get().to(get_course_by_slug)),
                     )
                     .service(
-                        web::scope("/lessons")
-                        .route("/{id}", web::get().to(get_lesson_by_id)),
+                        web::scope("/lessons").route("/{id}", web::get().to(get_lesson_by_id)),
                     ),
             )
             .app_data(db_pool.clone())

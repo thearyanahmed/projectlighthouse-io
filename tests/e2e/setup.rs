@@ -1,5 +1,5 @@
 use lighthouseio::api::Api;
-use lighthouseio::api::get_connection_pool;
+// use lighthouseio::api::get_connection_pool;
 use lighthouseio::config::{DatabaseSettings, get_configuration};
 use sqlx::{Connection, Executor, PgConnection, PgPool};
 use std::ffi::OsStr;
@@ -8,8 +8,6 @@ use uuid::Uuid;
 
 pub struct TestApp {
     pub address: String,
-    pub port: u16,
-    pub db_pool: PgPool,
 }
 
 // Spawns an instance of the app. It binds to a random port.
@@ -33,14 +31,7 @@ pub async fn setup_api() -> TestApp {
     let address = format!("http://localhost:{}", port);
     let _ = tokio::spawn(app.run_until_stopped());
 
-    let db_pool = get_connection_pool(&config.database);
-    log::debug!("address is {}", address);
-
-    TestApp {
-        port,
-        address,
-        db_pool,
-    }
+    TestApp { address }
 }
 
 // Configures the database. Creates a connection pool and runs migration.

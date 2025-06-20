@@ -1,21 +1,21 @@
 use std::fmt;
 
 pub enum CacheControl {
-    NoCache,
-    NoStore,
+    // NoCache,
+    // NoStore,
     MaxAge(u32),
-    Public,
-    Private,
+    // Public,
+    // Private,
 }
 
 impl fmt::Display for CacheControl {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            CacheControl::NoCache => write!(f, "no-cache"),
-            CacheControl::NoStore => write!(f, "no-store"),
+            // CacheControl::NoCache => write!(f, "no-cache"),
+            // CacheControl::NoStore => write!(f, "no-store"),
             CacheControl::MaxAge(secs) => write!(f, "max-age={}", secs),
-            CacheControl::Public => write!(f, "public"),
-            CacheControl::Private => write!(f, "private"),
+            // CacheControl::Public => write!(f, "public"),
+            // CacheControl::Private => write!(f, "private"),
         }
     }
 }
