@@ -145,55 +145,40 @@ async fn test_get_course_by_slug_response_structure_is_correct() {
         "seo_description",
         "seo_keywords",
         "seo_image",
-        // "published_at",
         "created_at",
         "updated_at",
-        "modules",
     ];
+
     for field in expected_fields.iter() {
         assert!(body.get(*field).is_some(), "Missing field: {}", field);
     }
 
-    // Check modules array
-    let modules = body.get("modules").expect("missing modules");
-    assert!(modules.is_array(), "modules is not an array");
-    for module in modules.as_array().unwrap() {
-        let module_fields = ["id", "course_id", "name", "position", "lessons"];
-        for field in module_fields.iter() {
+    let lessons = body.get("lessons").expect("missing lessons");
+    assert!(lessons.is_array(), "lessons is not an array");
+    for lesson in lessons.as_array().unwrap() {
+        let lesson_fields = [
+            "id",
+            "course_id",
+            "name",
+            "media_url",
+            "content",
+            "created_at",
+            "updated_at",
+            "deleted_at",
+            "meta_name",
+            "meta_description",
+            "meta_keywords",
+            "meta_image",
+            "page_layout",
+            "read_time",
+            "watch_time",
+        ];
+        for field in lesson_fields.iter() {
             assert!(
-                module.get(*field).is_some(),
-                "Module missing field: {}",
+                lesson.get(*field).is_some(),
+                "Lesson missing field: {}",
                 field
             );
-        }
-        let lessons = module.get("lessons").expect("missing lessons");
-        assert!(lessons.is_array(), "lessons is not an array");
-        for lesson in lessons.as_array().unwrap() {
-            let lesson_fields = [
-                "id",
-                "course_id",
-                "module_id",
-                "name",
-                "media_url",
-                "content",
-                "created_at",
-                "updated_at",
-                "deleted_at",
-                "meta_name",
-                "meta_description",
-                "meta_keywords",
-                "meta_image",
-                "page_layout",
-                "read_time",
-                "watch_time",
-            ];
-            for field in lesson_fields.iter() {
-                assert!(
-                    lesson.get(*field).is_some(),
-                    "Lesson missing field: {}",
-                    field
-                );
-            }
         }
     }
 }
