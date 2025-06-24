@@ -72,7 +72,7 @@ fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, st
             .wrap(middleware::NormalizePath::trim())
             .wrap(Logger::new("%a %t %T %P %b %{User-Agent}i"))
             .service(
-                web::scope("/api/v1")
+                web::scope("/v1")
                     .route("/healthz", web::get().to(health_check))
                     .route("/tags", web::get().to(all_tags))
                     .route("/categories", web::get().to(all_categories))

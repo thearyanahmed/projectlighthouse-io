@@ -6,7 +6,7 @@ async fn all_courses_endpoint_returns_array() {
     let client = reqwest::Client::new();
 
     let response = client
-        .get(format!("{}/api/v1/courses", &app.address))
+        .get(format!("{}/v1/courses", &app.address))
         .send()
         .await
         .expect("failed to execute test");
@@ -34,7 +34,7 @@ async fn get_course_by_slug_endpoint_returns_course() {
 
     // Get all courses
     let all_courses_response = client
-        .get(format!("{}/api/v1/courses", &app.address))
+        .get(format!("{}/v1/courses", &app.address))
         .send()
         .await
         .expect("failed to get all courses");
@@ -56,7 +56,7 @@ async fn get_course_by_slug_endpoint_returns_course() {
         .expect("course has no slug");
 
     let response = client
-        .get(format!("{}/api/v1/courses/{}", &app.address, slug))
+        .get(format!("{}/v1/courses/{}", &app.address, slug))
         .send()
         .await
         .expect("failed to execute test");
@@ -83,7 +83,7 @@ async fn get_course_by_slug_endpoint_returns_404_for_non_existent_slug() {
 
     let response = client
         .get(format!(
-            "{}/api/v1/courses/{}",
+            "{}/v1/courses/{}",
             &app.address, non_existent_slug
         ))
         .send()
@@ -100,7 +100,7 @@ async fn test_get_course_by_slug_response_structure_is_correct() {
 
     // Get all courses and pick the first slug
     let all_courses_response = client
-        .get(format!("{}/api/v1/courses", &app.address))
+        .get(format!("{}/v1/courses", &app.address))
         .send()
         .await
         .expect("failed to get all courses");
@@ -123,7 +123,7 @@ async fn test_get_course_by_slug_response_structure_is_correct() {
 
     // Get course by slug
     let response = client
-        .get(format!("{}/api/v1/courses/{}", &app.address, slug))
+        .get(format!("{}/v1/courses/{}", &app.address, slug))
         .send()
         .await
         .expect("failed to execute test");
