@@ -14,7 +14,6 @@ pub struct AppConfig {
 
 #[derive(serde::Deserialize, Debug)]
 pub struct DatabaseSettings {
-    pub driver: String,
     pub username: String,
     #[serde(deserialize_with = "deserialize_secret_string")]
     pub password: SecretString,
@@ -49,6 +48,8 @@ impl DatabaseSettings {
             .database(&self.database_name)
     }
 
+    // I'm unsure why this is necessary.
+    #[allow(dead_code)]
     pub fn without_db(&self) -> PgConnectOptions {
         let ssl_mode = if self.require_ssl {
             PgSslMode::Require
@@ -64,6 +65,7 @@ impl DatabaseSettings {
             .ssl_mode(ssl_mode)
     }
 
+    #[allow(dead_code)]
     pub fn with_db(&self) -> PgConnectOptions {
         self.without_db().database(&self.database_name)
     }
@@ -86,15 +88,6 @@ pub fn get_configuration() -> Result<AppConfig, config::ConfigError> {
 pub enum Environment {
     Local,
     Production,
-}
-
-impl Environment {
-    pub fn as_str(&self) -> &'static str {
-        match self {
-            Environment::Local => "local",
-            Environment::Production => "local",
-        }
-    }
 }
 
 impl TryFrom<String> for Environment {

@@ -66,7 +66,7 @@
         : null;
 </script>
 
-<div class="px-4 sm:px-6">
+<div class="mt-10 px-4 sm:px-6">
     <div class="mx-auto max-w-7xl">
         <div class="-mx-2 sm:-mx-4">
             <div

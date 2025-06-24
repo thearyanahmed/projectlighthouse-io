@@ -1,4 +1,3 @@
-use actix_web::middleware::Logger;
 use env_logger::Env;
 mod api;
 mod config;

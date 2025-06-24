@@ -1,0 +1,12 @@
+# Ignore build artifacts
+target
+
+# Ignore dev and local-only dirs
+docker/
+flare/
+
+# Optional ignores
+.git
+__ignored
+*.sh
+*.sql

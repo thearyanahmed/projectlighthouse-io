@@ -1,5 +1,5 @@
-base_url: "http://localhost:8000"
-port: 8000
+base_url: "http://localhost:8080"
+port: 8080
 host: "127.0.0.1"
 database:
   driver: "postgres"

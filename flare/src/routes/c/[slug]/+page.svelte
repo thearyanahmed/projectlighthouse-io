@@ -21,7 +21,7 @@
     {/if}
 
     {#if course}
-        <main class="px-4 sm:px-6">
+        <main class="mt-10 px-4 sm:px-6">
             <div class="relative mx-auto max-w-7xl">
                 <div
                     class="absolute -inset-x-2 top-0 -z-10 h-80 overflow-hidden rounded-t-2xl mask-b-from-60% sm:h-88 md:h-112 lg:-inset-x-4 lg:h-128"

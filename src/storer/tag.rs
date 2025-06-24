@@ -27,13 +27,6 @@ impl StaticLookup for Tag {
         ];
         return tags.to_vec();
     }
-
-    fn id(&self) -> i32 {
-        self.id
-    }
-    fn slug(&self) -> &str {
-        &self.slug
-    }
 }
 
 #[cfg(test)]
@@ -47,23 +40,5 @@ mod tests {
         assert_eq!(tags.len(), 2);
         assert_eq!(tags[0].name, "rust");
         assert_eq!(tags[1].slug, "go");
-    }
-
-    #[test]
-    fn test_find_by_id() {
-        let tag = Tag::find_by_id(1).expect("Tag not found");
-        assert_eq!(tag.name, "rust");
-    }
-
-    #[test]
-    fn test_find_by_slug() {
-        let tag = Tag::find_by_slug("go").expect("Tag not found");
-        assert_eq!(tag.id, 2);
-    }
-
-    #[test]
-    fn test_not_found() {
-        assert!(Tag::find_by_id(999).is_none());
-        assert!(Tag::find_by_slug("python").is_none());
     }
 }

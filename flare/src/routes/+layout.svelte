@@ -7,9 +7,9 @@
 
 <div class="isolate">
 	<div class="group">
-		<div class="xl:not-group-data-sidebar-collapsed:ml-(--container-2xs)">
+		<div class="max-w-5xl mx-auto">
 			<div
-				class="sticky top-0 z-10 backdrop-blur-sm flex items-center justify-between gap-x-8 px-4 py-4 sm:px-6"
+				class="sticky top-0 z-10 backdrop-blur-sm flex items-center gap-x-8 px-4 py-4 sm:px-6"
 			>
 				<div class="flex min-w-0 shrink items-center gap-x-4">
 					<button
@@ -27,11 +27,37 @@
 						></button
 					>
 					<div class="min-w-0">
+						<!-- this is the logo -->
 						<TopBarBreadcrumb />
 					</div>
 				</div>
 
-				<CoursePageTopNavbar />
+				<nav class="flex items-center">
+					<div class="flex gap-x-6 text-sm/6 text-gray-950">
+						<a href="/resources">Resources</a>
+						{#if false}
+							<button
+								class="inline-flex items-center gap-x-2 focus:not-data-focus:outline-none"
+								id="headlessui-menu-button-«r10»"
+								type="button"
+								aria-haspopup="menu"
+								aria-expanded="false"
+								data-headlessui-state=""
+								>Account<svg
+									viewBox="0 0 8 4"
+									fill="none"
+									class="stroke-gray-950 dark:stroke-white h-1 shrink-0"
+									><path
+										fill="none"
+										d="M1 0.5L4 3.5L7 0.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									></path></svg
+								></button
+							>
+						{/if}
+					</div>
+				</nav>
 			</div>
 
 			<main class="px-4 sm:px-6">
