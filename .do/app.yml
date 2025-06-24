@@ -1,0 +1,19 @@
+name: "lighthouse"
+services:
+  - name: api
+    github:
+      repo: thearyanahmed/projectlighthouse-io
+      branch: master
+      deploy_on_push: true
+    source_dir: /
+    dockerfile_path: /Dockerfile
+    internal_ports:
+      - 8001
+    http_port:
+
+  - name: flare
+    github:
+      repo: thearyanahmed/projectlighthouse-io
+      branch: master
+      deploy_on_push: true
+    source_dir: /flare

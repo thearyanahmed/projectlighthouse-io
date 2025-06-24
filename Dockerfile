@@ -30,7 +30,5 @@ WORKDIR /app
 # Copy renamed binary
 COPY --from=builder /app/target/release/lighttheway /app/lighttheway
 
-# ADD THIS LINE HERE:
-COPY config/ /app/config/
-
-CMD ["./lighttheway"]
+COPY entrypoint.sh /app/entrypoint.sh
+CMD ["/app/entrypoint.sh"]
