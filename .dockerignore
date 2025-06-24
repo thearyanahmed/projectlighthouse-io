@@ -10,3 +10,4 @@ flare/
 __ignored
 *.sh
 *.sql
+!entrypoint.sh
