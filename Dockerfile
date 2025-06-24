@@ -13,8 +13,6 @@ RUN rm -rf src
 
 # Copy full source and build actual binary
 COPY . .
-# Remove this line: COPY config/ /app/config/
-RUN ls -la
 RUN cargo build --release --bin lighthouseio
 
 # Rename binary to lighttheway

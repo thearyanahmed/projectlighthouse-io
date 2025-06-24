@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-cat > /app/config/base.yaml <<EOF
+cat > /app/config/base.yml <<EOF
 base_url: "${BASE_URL:-http://localhost:8080}"
 port: ${PORT:-8080}
 host: "${HOST:-127.0.0.1}"
