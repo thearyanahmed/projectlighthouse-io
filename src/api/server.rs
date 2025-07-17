@@ -14,6 +14,8 @@ use anyhow::Result;
 use sqlx::PgPool;
 use sqlx::postgres::PgPoolOptions;
 use std::net::TcpListener;
+use futures::StreamExt;
+use log::{info, error};
 
 pub struct Api {
     server: Server,
@@ -74,6 +76,7 @@ fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, st
             .service(
                 web::scope("/v1")
                     .route("/healthz", web::get().to(health_check))
+                    .route("/webhooks/", web::post().to(handle_webhook))
                     .route("/tags", web::get().to(all_tags))
                     .route("/categories", web::get().to(all_categories))
                     .service(
@@ -101,3 +104,27 @@ pub async fn health_check() -> HttpResponse {
         .content_type("application/json")
         .json(response_body)
 }
+
+pub async fn handle_webhook(req: HttpRequest, mut body: web::Payload) -> HttpResponse {
+    // Log headers
+    for (key, value) in req.headers().iter() {
+        info!("Header: {}: {:?}", key, value);
+    }
+
+    // Read and log body
+    let mut bytes = web::BytesMut::new();
+    while let Some(chunk) = body.next().await {
+        match chunk {
+            Ok(data) => bytes.extend_from_slice(&data),
+            Err(e) => {
+                error!("Error reading body: {:?}", e);
+                return HttpResponse::BadRequest().finish();
+            }
+        }
+    }
+
+    info!("Body: {}", String::from_utf8_lossy(&bytes));
+
+    HttpResponse::Ok().finish()
+}
+
