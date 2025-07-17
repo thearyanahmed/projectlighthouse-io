@@ -82,10 +82,7 @@ async fn get_course_by_slug_endpoint_returns_404_for_non_existent_slug() {
     let non_existent_slug = "this-course-does-not-exist";
 
     let response = client
-        .get(format!(
-            "{}/v1/courses/{}",
-            &app.address, non_existent_slug
-        ))
+        .get(format!("{}/v1/courses/{}", &app.address, non_existent_slug))
         .send()
         .await
         .expect("failed to execute test");

@@ -9,14 +9,14 @@ use actix_web::dev::Server;
 use actix_web::middleware;
 use actix_web::middleware::Logger;
 use actix_web::web::Data;
-use actix_web::{App, HttpResponse, HttpServer, web};
+use actix_web::{App, HttpRequest, HttpResponse, HttpServer, web};
 use anyhow::Result;
+// use futures::StreamExt;
+use futures_util::stream::StreamExt;
+use log::{error, info};
 use sqlx::PgPool;
 use sqlx::postgres::PgPoolOptions;
 use std::net::TcpListener;
-use futures::StreamExt;
-use log::{info, error};
-
 pub struct Api {
     server: Server,
     address: String,
@@ -76,7 +76,7 @@ fn listen_and_serve(listener: TcpListener, db_pool: PgPool) -> Result<Server, st
             .service(
                 web::scope("/v1")
                     .route("/healthz", web::get().to(health_check))
-                    .route("/webhooks/", web::post().to(handle_webhook))
+                    .route("/webhooks", web::post().to(handle_webhook))
                     .route("/tags", web::get().to(all_tags))
                     .route("/categories", web::get().to(all_categories))
                     .service(
@@ -111,20 +111,19 @@ pub async fn handle_webhook(req: HttpRequest, mut body: web::Payload) -> HttpRes
         info!("Header: {}: {:?}", key, value);
     }
 
-    // Read and log body
-    let mut bytes = web::BytesMut::new();
-    while let Some(chunk) = body.next().await {
-        match chunk {
-            Ok(data) => bytes.extend_from_slice(&data),
+    // Read body
+    let mut body_bytes = web::BytesMut::new();
+    while let Some(result) = body.next().await {
+        match result {
+            Ok(chunk) => body_bytes.extend_from_slice(&chunk),
             Err(e) => {
-                error!("Error reading body: {:?}", e);
+                error!("Failed to read request body: {}", e);
                 return HttpResponse::BadRequest().finish();
             }
         }
     }
 
-    info!("Body: {}", String::from_utf8_lossy(&bytes));
+    info!("Body: {}", String::from_utf8_lossy(&body_bytes));
 
     HttpResponse::Ok().finish()
 }
-
